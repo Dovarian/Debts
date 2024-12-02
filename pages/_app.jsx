@@ -1,0 +1,12 @@
+import clsx from "clsx";
+import "../styles/global.css";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin", "cyrillic"] });
+export default function App({ Component, pageProps }) {
+    return (
+        <div className={clsx(inter.className, "text-slate-800 bg-slate-50 h-screen")}>
+            <Component {...pageProps} />
+            <div id="modals"></div>
+        </div>
+    );
+}
