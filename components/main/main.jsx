@@ -7,12 +7,13 @@ export function Main() {
             <div>
                 <Filter />
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 justify-center items-center">
                 <Debt />
                 <Debt />
                 <Debt />
                 <Debt />
                 <Debt />
+                <span className="select-none cursor-pointer font-bold text-8xl text-green-500">+</span>
             </div>
         </div>
     );
