@@ -1,3 +1,3 @@
 export function VertLine({ height }) {
-    return <div className={`w-px h-${height} bg-slate-600`} />;
+    return <div className={`w-px h-${String(height)} bg-slate-600`} />;
 }

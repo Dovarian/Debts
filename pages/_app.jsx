@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 export default function App({ Component, pageProps }) {
     return (
-        <div className={clsx(inter.className, "text-slate-800 bg-slate-50 h-screen")}>
+        <div className={clsx(inter.className, "text-slate-800")}>
             <Component {...pageProps} />
             <div id="modals"></div>
         </div>
