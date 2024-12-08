@@ -1,11 +1,12 @@
 import { Debt } from "./ui/debt";
 import { Filter } from "./ui/filter";
 import { useDebts } from "../../js/hooks/use-debts";
-import { displayDebtMenu } from "../../js/handles/display-debt-menu";
+import { displayModal } from "../../js/handles/display-modal";
+import { CreateDebtModal } from "../modals/create-debt-menu/create-debt-modal";
 
 export function Main() {
     const { debtsList, delDebt } = useDebts();
-    const { showDebtMenu } = displayDebtMenu();
+    const { showModal } = displayModal();
 
     return (
         <div className="w-2/4 flex flex-col gap-14">
@@ -22,11 +23,12 @@ export function Main() {
                 })}
                 <span
                     className="select-none cursor-pointer font-bold text-8xl text-slate-300 hover:text-slate-400 transition"
-                    onClick={() => showDebtMenu()}
+                    onClick={() => showModal(document.querySelector("#create-debt-modal"))}
                 >
                     +
                 </span>
             </div>
+            <CreateDebtModal />
         </div>
     );
 }
