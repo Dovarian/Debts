@@ -11,6 +11,7 @@ export function ChooseAvatar() {
                 Выбрать
                 <input
                     type="file"
+                    accept="image/*"
                     onChange={(event) => {
                         if (event.target.files && event.target.files[0]) {
                             setImage(URL.createObjectURL(event.target.files[0]));
@@ -18,7 +19,6 @@ export function ChooseAvatar() {
                     }}
                     id="file_input"
                     className="hidden"
-                    accept=".png, .gif, .jpg, .svg"
                 />
             </label>
         </div>

@@ -36,7 +36,9 @@ export function CreateDebtModal() {
                             <Input placeholder="Сумма" required={false} type="number" />
                             <Currency className="bg-slate-100 hover:bg-slate-200 transition" />
                         </div>
-                        <Input required={false} type="date" />
+                        <div className="flex items-center gap-2">
+                            <label htmlFor="date">До</label> <Input required={false} type="date" id="date" />
+                        </div>
                     </div>
                 </div>
                 <div className="flex justify-center mt-6">
@@ -52,7 +54,7 @@ export function CreateDebtModal() {
                 </div>
                 <div
                     className="text-2xl font-bold text-red-600 select-none cursor-pointer opacity-50 hover:opacity-100 transition
-                absolute top-2 right-2"
+                    absolute top-2 right-2"
                     onClick={() => hideModal(document.querySelector("#create-debt-modal"))}
                 >
                     X
