@@ -1,4 +1,4 @@
-import { Currency } from "./currency";
+import { Currency } from "../../uikit/currency";
 import { Limit } from "./limit";
 import { Slider } from "./slider";
 
@@ -12,11 +12,11 @@ export function Filter() {
             <div className="flex flex-col gap-4">
                 <div className="flex gap-2">
                     <Limit hint="От" />
-                    <Currency />
+                    <Currency className="bg-white" />
                 </div>
                 <div className="flex gap-2">
                     <Limit hint="До" />
-                    <Currency />
+                    <Currency className="bg-white" />
                 </div>
             </div>
         </div>

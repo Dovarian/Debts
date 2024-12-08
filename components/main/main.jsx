@@ -1,10 +1,11 @@
 import { Debt } from "./ui/debt";
 import { Filter } from "./ui/filter";
-import { useDebts } from "./use-debts";
-import avatarSrc from "../../imgs/avatar.png";
+import { useDebts } from "../../js/hooks/use-debts";
+import { displayDebtMenu } from "../../js/handles/display-debt-menu";
 
 export function Main() {
-    const { debtsList, addDebt, delDebt } = useDebts();
+    const { debtsList, delDebt } = useDebts();
+    const { showDebtMenu } = displayDebtMenu();
 
     return (
         <div className="w-2/4 flex flex-col gap-14">
@@ -21,15 +22,7 @@ export function Main() {
                 })}
                 <span
                     className="select-none cursor-pointer font-bold text-8xl text-slate-300 hover:text-slate-400 transition"
-                    onClick={() =>
-                        addDebt({
-                            avatar: avatarSrc,
-                            name: "Дима Болтенков",
-                            total: -10000,
-                            debtsList: [{ debt: 1000, date: "31.12.2024" }],
-                            id: 0,
-                        })
-                    }
+                    onClick={() => showDebtMenu()}
                 >
                     +
                 </span>

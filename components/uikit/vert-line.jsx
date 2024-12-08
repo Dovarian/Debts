@@ -1,3 +1,5 @@
-export function VertLine({ height }) {
-    return <div className={`w-px h-${String(height)} bg-slate-600`} />;
+import clsx from "clsx";
+
+export function VertLine({ className }) {
+    return <div className={clsx("w-px bg-slate-500", className)} />;
 }

@@ -1,4 +1,4 @@
-import avatarSrc from "../imgs/avatar.png";
+import avatarSrc from "../../imgs/avatar.png";
 
 export const debts = [
     {

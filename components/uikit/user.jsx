@@ -7,7 +7,7 @@ export function User({ src, name, variability }) {
     return (
         <div className="text-2xl flex items-center gap-3">
             <div className={clsx("group relative", variability && "cursor-pointer")}>
-                <Image src={src} alt="avatar" height={40} width={40} />
+                <Image src={src} alt="avatar" height={40} width={40} className="rounded-full h-10 w-10" />
                 <EditIcon_2
                     className={clsx(
                         "opacity-0 absolute top-px left-px bg-slate-400 size-full p-[3px] rounded-full transition",
