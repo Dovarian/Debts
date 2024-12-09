@@ -1,9 +1,8 @@
 import Image from "next/image";
-import defaultAvatar from "../../../../imgs/default-avatar.png";
 import { useState } from "react";
 
-export function ChooseAvatar() {
-    const [image, setImage] = useState(defaultAvatar);
+export function ChooseAvatar({ avatar, ...props }) {
+    const [image, setImage] = useState(avatar);
     return (
         <div className="flex flex-col items-center justify-center gap-4">
             <Image src={image} alt="avatar" className="rounded-full h-20 w-20" height={80} width={80} />
@@ -19,6 +18,7 @@ export function ChooseAvatar() {
                     }}
                     id="file_input"
                     className="hidden"
+                    {...props}
                 />
             </label>
         </div>

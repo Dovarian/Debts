@@ -4,7 +4,7 @@ import { VertLine } from "../../uikit/vert-line";
 export function Debt({ debt, delDebt, id }) {
     return (
         <div className="bg-white shadow p-8 w-full h-14 text-2xl flex items-center gap-4 group/debt">
-            <User src={debt.avatar} name="Дмитрий Болтенков" variability={true} />
+            <User src={debt.avatar} name={debt.name} variability={true} />
             <VertLine className="h-8" />
             <div className="font-medium text-red-600">{debt.total}₽</div>
             <VertLine className="h-8" />
