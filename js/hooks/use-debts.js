@@ -9,8 +9,16 @@ export function useDebts() {
     };
 
     const delDebt = (id) => {
-        setDebts((lastDebts) => lastDebts.filter((_, i) => i != id));
+        console.log(id);
+
+        setDebts((lastDebts) => [...lastDebts.filter((_, i) => i != id)]);
     };
 
-    return { debtsList, addDebt, delDebt };
+    const replaceDebt = (id, key, value) => {
+        let newDebtsList = debtsList.slice();
+        newDebtsList[id][key] = value;
+        setDebts(newDebtsList);
+    };
+
+    return { debtsList, addDebt, delDebt, replaceDebt };
 }

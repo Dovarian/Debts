@@ -8,7 +8,7 @@ export function Header() {
             <div className="text-5xl">Долги</div>
             <div className="flex items-center gap-10">
                 <VertLine className="h-12" />
-                <User src={avatarSrc} name="Кирилл В" variability={false} />
+                <User src={avatarSrc} userName="Кирилл В" variability={false} />
             </div>
         </div>
     );

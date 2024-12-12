@@ -52,7 +52,6 @@ export function CreateDebtModal({ addDebt }) {
                             } else {
                                 document.querySelector("#error").classList.add("opacity-0");
                                 const form = document.forms.debt.elements;
-                                console.log(form.name.value + form.surname.value);
 
                                 addDebt({
                                     avatar:
