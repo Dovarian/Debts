@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import defaultAvatar from "../../../imgs/default-avatar.png";
 
-export function CreateDebtModal({ addDebt }) {
+export function CreateUserDebtModal({ addDebt }) {
     const { hideModal } = displayModal();
 
     const [isClient, setIsClient] = useState(false);
@@ -33,7 +33,7 @@ export function CreateDebtModal({ addDebt }) {
                         <VertLine className="h-24" />
                         <div className="flex flex-col gap-4">
                             <div className="flex items-center gap-2">
-                                <Input placeholder="Сумма" required={false} type="number" name="total" />
+                                <Input placeholder="Сумма" required={false} type="number" name="amount" />
                                 <Currency className="bg-slate-100 hover:bg-slate-200 transition" name="currency" />
                             </div>
                             <div className="flex items-center gap-2">
@@ -59,11 +59,13 @@ export function CreateDebtModal({ addDebt }) {
                                             ? defaultAvatar
                                             : URL.createObjectURL(form.avatar.files[0]),
                                     name: form.name.value + " " + form.surname.value,
-                                    total: form.total.value,
                                     debtsList: [
                                         {
-                                            debt: form.total.value,
-                                            date: form.date.value.split("-").reverse().join("."),
+                                            debt: form.amount.value != "" ? form.amount.value : 0,
+                                            date:
+                                                form.date.value != ""
+                                                    ? form.date.value.split("-").reverse().join(".")
+                                                    : "00.00.0000",
                                         },
                                     ],
                                 });
