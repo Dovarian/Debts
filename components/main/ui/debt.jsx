@@ -5,7 +5,7 @@ import { DebtsMenu } from "../../modals";
 import { displayDebtsMenu } from "../../../js/handles/display-debts-menu";
 import clsx from "clsx";
 
-export function Debt({ debt, delDebt, id, replaceDebt, delDebtsList, addDebtsList }) {
+export function Debt({ debt, delDebt, id, replaceDebt, delDebtsList, addDebtsList, sortDebtsList }) {
     const [edit, setEdit] = useState({
         user: false,
     });
@@ -16,9 +16,10 @@ export function Debt({ debt, delDebt, id, replaceDebt, delDebtsList, addDebtsLis
     useEffect(() => {
         setIsClient(true);
         window.addEventListener("click", (e) => {
+            console.log(e.target.closest(".close"));
             console.log(e.target.closest("#debtsList"));
 
-            if (!e.target.closest("#debtsList") && !e.target.closest(".debtsMenu")) {
+            if (!e.target.closest("#debtsList") && !e.target.closest(".close") && !e.target.closest(".debtsMenu")) {
                 hideMenu(document.querySelectorAll(".debtsMenu")[id]);
             }
         });
@@ -60,6 +61,7 @@ export function Debt({ debt, delDebt, id, replaceDebt, delDebtsList, addDebtsLis
                         id={id}
                         delDebtsList={delDebtsList}
                         addDebtsList={addDebtsList}
+                        sortDebtsList={sortDebtsList}
                     />
                 </div>
                 <div

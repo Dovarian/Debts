@@ -18,10 +18,13 @@ export function useDebts() {
         setDebts(newDebtsList);
     };
 
-    const delDebtsList = (id, i) => {
+    const delDebtsList = (id, i, edit, setEdit) => {
         if (debtsList[id].debtsList.length > 1) {
             let newDebtsList = debtsList.slice();
             newDebtsList[id].debtsList.splice(i, 1);
+            let newEdit = edit.slice();
+            newEdit.splice(i, 1);
+            setEdit(newEdit);
             setDebts(newDebtsList);
         }
     };
@@ -32,5 +35,12 @@ export function useDebts() {
         setDebts(newDebtsList);
     };
 
-    return { debtsList, addDebt, delDebt, replaceDebt, delDebtsList, addDebtsList };
+    const sortDebtsList = (id, currentDebtsList) => {
+        currentDebtsList.sort(
+            (a, b) => new Date(a.date.split(".").reverse().join("-")) - new Date(b.date.split(".").reverse().join("-"))
+        );
+        replaceDebt(id, "debtsList", currentDebtsList);
+    };
+
+    return { debtsList, addDebt, delDebt, replaceDebt, delDebtsList, addDebtsList, sortDebtsList };
 }

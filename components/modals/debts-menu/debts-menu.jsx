@@ -3,7 +3,7 @@ import { EditIcon_1 } from "../../../icons/edit_1-icon";
 import { Input } from "../../uikit/input";
 import clsx from "clsx";
 
-export function DebtsMenu({ debtsList, replaceDebt, id, delDebtsList, addDebtsList }) {
+export function DebtsMenu({ debtsList, replaceDebt, id, delDebtsList, addDebtsList, sortDebtsList }) {
     const [edit, setEdit] = useState(new Array(debtsList.length).fill(false));
 
     return (
@@ -21,6 +21,7 @@ export function DebtsMenu({ debtsList, replaceDebt, id, delDebtsList, addDebtsLi
                                 id={id}
                                 i={i}
                                 setEdit={setEdit}
+                                sortDebtsList={sortDebtsList}
                             />
                             <Item
                                 key={i}
@@ -46,6 +47,7 @@ export function DebtsMenu({ debtsList, replaceDebt, id, delDebtsList, addDebtsLi
                                 id={id}
                                 i={i}
                                 setEdit={setEdit}
+                                sortDebtsList={sortDebtsList}
                                 className="hidden"
                             />
                             <Item
@@ -107,7 +109,7 @@ function Item({ debt, i, edit, setEdit, className, id, delDebtsList }) {
             <div
                 className="absolute top-1/5 right-2 text-red-600
                              select-none cursor-pointer opacity-50 transition hover:opacity-100 p-2 close"
-                onClick={() => delDebtsList(id, i)}
+                onClick={() => delDebtsList(id, i, edit, setEdit)}
             >
                 x
             </div>
@@ -115,7 +117,7 @@ function Item({ debt, i, edit, setEdit, className, id, delDebtsList }) {
     );
 }
 
-function ItemInput({ debt, replaceDebt, edit, setEdit, id, i, className, debtsList }) {
+function ItemInput({ debt, replaceDebt, edit, setEdit, id, i, className, debtsList, sortDebtsList }) {
     return (
         <div className={clsx("flex items-center flex-col gap-2 justify-between py-2 px-4 border", className)}>
             <span className="flex items-center gap-1">
@@ -132,7 +134,7 @@ function ItemInput({ debt, replaceDebt, edit, setEdit, id, i, className, debtsLi
                                 let newEdit = edit.slice();
                                 newEdit[i] = false;
                                 let newDebtsList = debtsList.slice();
-                                newDebtsList[i].debt = event.target.value;
+                                newDebtsList[i].debt = Number(event.target.value);
                                 setEdit(newEdit);
                                 console.log(inputDate.value == "");
                                 if (inputDate.value != "") {
@@ -141,6 +143,7 @@ function ItemInput({ debt, replaceDebt, edit, setEdit, id, i, className, debtsLi
                                     newDebtsList[i].date = inputDate.value.split("-").reverse().join(".");
                                 }
                                 replaceDebt(id, "debtsList", newDebtsList);
+                                sortDebtsList(id, newDebtsList);
                             } else {
                                 let newEdit = edit.slice();
                                 newEdit[i] = false;
@@ -186,6 +189,7 @@ function ItemInput({ debt, replaceDebt, edit, setEdit, id, i, className, debtsLi
                                     newDebtsList[i].debt = inputDebt.value;
                                 }
                                 replaceDebt(id, "date", newDebtsList);
+                                sortDebtsList(id, newDebtsList);
                             } else {
                                 let newEdit = edit.slice();
                                 newEdit[i] = false;

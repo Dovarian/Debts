@@ -5,9 +5,8 @@ import { displayModal } from "../../js/handles/display-modal";
 import { CreateUserDebtModal } from "../modals/create-userDebt-modal/create-userDebt-modal";
 
 export function Main() {
-    const { debtsList, addDebt, delDebt, replaceDebt, delDebtsList, addDebtsList } = useDebts();
+    const { debtsList, addDebt, delDebt, replaceDebt, delDebtsList, addDebtsList, sortDebtsList } = useDebts();
     const { showModal } = displayModal();
-
     return (
         <div className="w-2/4 flex flex-col gap-14">
             <div>
@@ -25,6 +24,7 @@ export function Main() {
                                 replaceDebt={replaceDebt}
                                 delDebtsList={delDebtsList}
                                 addDebtsList={addDebtsList}
+                                sortDebtsList={sortDebtsList}
                             />
                         </>
                     );
