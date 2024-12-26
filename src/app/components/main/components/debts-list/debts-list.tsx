@@ -1,17 +1,16 @@
 "use client";
 
-import { DebtsClass } from "../../../../../lib/debts-class";
 import { DebtClass } from "../../../../../lib/debt-class";
 import { Debt } from "./ui/debt";
 import { CreateDebtModal } from "../../../modals/createDebt/createDebt-modal";
 import { DisplayModalClass } from "../../../../../lib/display-modal";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { DebtsClass } from "../../../../../lib/debts-class";
 import { DebtsInterface } from "../../../../../interfaces/interfaces";
-import { debtsConstant } from "../../../../../constants/debts";
 
-export function DebtsList() {
-    const [debts, setDebts] = useState<DebtsInterface[]>(debtsConstant);
-    const debtsClass = new DebtsClass(debts, setDebts);
+
+export function DebtsList({debtsClass, setDebts, debts} : {debtsClass : DebtsClass, setDebts: React.Dispatch<React.SetStateAction<DebtsInterface[]>>, debts: DebtsInterface[]}) {
+
     const modal = useRef<HTMLDialogElement | string>("");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
