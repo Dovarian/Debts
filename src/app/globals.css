@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg: #f3f3f3;
+    --fg: #171717;
+    --div-bg: white;
+    --disabled-text: #cbd5e1;
+    --h-disabled-text: #94a3b8;
+}
+
+body {
+    color: var(--fg);
+    background: var(--bg);
+    font-family: Arial, Helvetica, sans-serif;
+}
