@@ -14,6 +14,7 @@ export class CreateDebtClass {
                     defaultEdit: false,
                 },
             ],
+            hidden: false,
         };
     }
 }

@@ -2,17 +2,20 @@ import clsx from "clsx";
 import { Input } from "../../../common/input";
 import { DebtClass } from "../../../../../lib/debt-class";
 import { convertDate } from "../../../../../helpers/helpers";
+import { DebtsClass } from "../../../../../lib/debts-class";
 
 export function DebtsInputItem({
     className,
     debtClass,
     i,
     setEdit,
+    debtsClass,
 }: {
     className?: string;
     debtClass: DebtClass;
     i: number;
     setEdit: React.Dispatch<React.SetStateAction<boolean>>;
+    debtsClass: DebtsClass;
 }) {
     return (
         <div
@@ -38,6 +41,7 @@ export function DebtsInputItem({
                                 debtClass.replaceDate(convertDate((dateInput as HTMLInputElement).value), i);
                             }
                             setEdit(false);
+                            debtsClass.setDebts((prev) => debtsClass.filter(prev));
                         }
                     }}
                     styleInput={{

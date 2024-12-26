@@ -41,6 +41,7 @@ export function CreateDebtModal({
                             if (form.userName.value != "") {
                                 error.classList.add("opacity-0");
                                 debtsClass.addDebt(createDebtClass.getDebt(form));
+                                debtsClass.setDebts((prev) => debtsClass.filter(prev));
                                 displayCreateDebtClass.closeModal();
                             } else {
                                 error.classList.remove("opacity-0");

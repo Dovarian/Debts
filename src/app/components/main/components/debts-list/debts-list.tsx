@@ -8,9 +8,15 @@ import { useRef } from "react";
 import { DebtsClass } from "../../../../../lib/debts-class";
 import { DebtsInterface } from "../../../../../interfaces/interfaces";
 
-
-export function DebtsList({debtsClass, setDebts, debts} : {debtsClass : DebtsClass, setDebts: React.Dispatch<React.SetStateAction<DebtsInterface[]>>, debts: DebtsInterface[]}) {
-
+export function DebtsList({
+    debtsClass,
+    setDebts,
+    debts,
+}: {
+    debtsClass: DebtsClass;
+    setDebts: React.Dispatch<React.SetStateAction<DebtsInterface[]>>;
+    debts: DebtsInterface[];
+}) {
     const modal = useRef<HTMLDialogElement | string>("");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -20,9 +26,9 @@ export function DebtsList({debtsClass, setDebts, debts} : {debtsClass : DebtsCla
 
     return (
         <section className="flex flex-col gap-6 mt-20">
-            {debtsClass.debts.map((_, i) => {
+            {debtsClass.debts.map((item, i) => {
                 const debtClass = new DebtClass(debts, setDebts, i);
-                return <Debt key={i} debtClass={debtClass} />;
+                return !item.hidden && <Debt key={i} debtClass={debtClass} debtsClass={debtsClass} />;
             })}
             <span
                 className="select-none cursor-pointer font-bold text-8xl text-[--disabled-text] hover:text-[--h-disabled-text] transition mx-auto"

@@ -13,5 +13,6 @@ export const debtsConstant: DebtsInterface[] = [
             { debt: 2000, date: "31.12.2027", defaultEdit: false },
             { debt: 3000, date: "31.12.2028", defaultEdit: false },
         ],
+        hidden: false,
     },
 ];

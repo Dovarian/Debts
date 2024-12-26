@@ -5,6 +5,7 @@ export interface DebtsInterface {
     avatar: StaticImport | string;
     name: string;
     debtsList: DebtsList[];
+    hidden: boolean;
 }
 
 interface DebtsList {

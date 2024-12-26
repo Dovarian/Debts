@@ -13,3 +13,7 @@ export const convertDate = (date: string) => {
         return date.split(".").reverse().join("-");
     }
 };
+
+export const compareObjects = (a: object, b: object) => {
+    return JSON.stringify(a) === JSON.stringify(b);
+};

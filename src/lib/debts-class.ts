@@ -15,7 +15,31 @@ export class DebtsClass {
         return this._debts;
     }
 
+    get setDebts(): State {
+        return this._setDebts;
+    }
+
     addDebt(debt: DebtsInterface): void {
         this._setDebts((prev) => [...prev, debt]);
+    }
+
+    filter(array: DebtsInterface[]): DebtsInterface[] {
+        const slider = (document.querySelector(".slider") as HTMLInputElement)?.checked;
+        const from = (document.querySelector(".from") as HTMLInputElement)?.value;
+        const to = (document.querySelector(".to") as HTMLInputElement)?.value;
+        return [...array].map((item) => {
+            const total = item.debtsList.reduce((acc, item) => (acc += Number(item.debt)), 0);
+            const isForMe = slider ? total >= 0 : true;
+            const isFromLess = from != "" ? Number(from) <= total : true;
+            const isToMore = to != "" ? total <= Number(to) : true;
+
+            if (isFromLess && isForMe && isToMore) {
+                item.hidden = false;
+                return item;
+            } else {
+                item.hidden = true;
+                return item;
+            }
+        });
     }
 }
