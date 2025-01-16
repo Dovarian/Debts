@@ -9,7 +9,7 @@ export interface DebtsInterface {
 }
 
 interface DebtsList {
-    debt: number;
+    amount: number;
     date: string;
     defaultEdit: boolean;
 }

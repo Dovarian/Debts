@@ -9,7 +9,7 @@ export class CreateDebtClass {
             name: form.userName.value + " " + form.surname.value,
             debtsList: [
                 {
-                    debt: form.amount.value != "" ? form.amount.value : 0,
+                    amount: form.amount.value != "" ? form.amount.value : 0,
                     date: form.date.value != "" ? convertDate(form.date.value) : "00.00.0000",
                     defaultEdit: false,
                 },

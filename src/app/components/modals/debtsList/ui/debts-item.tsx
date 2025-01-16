@@ -39,10 +39,10 @@ export function DebtsItem({
                 <div
                     className={clsx(
                         "font-medium whitespace-nowrap",
-                        debtClass.debt.debtsList[index].debt < 0 ? "text-red-600" : "text-green-600"
+                        debtClass.debt.debtsList[index].amount < 0 ? "text-red-600" : "text-green-600"
                     )}
                 >
-                    {debtClass.debt.debtsList[index].debt}₽
+                    {debtClass.debt.debtsList[index].amount}₽
                 </div>{" "}
                 <div className="whitespace-nowrap">до {debtClass.debt.debtsList[index].date}</div>
             </span>

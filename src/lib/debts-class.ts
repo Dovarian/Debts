@@ -28,7 +28,7 @@ export class DebtsClass {
         const from = (document.querySelector(".from") as HTMLInputElement)?.value;
         const to = (document.querySelector(".to") as HTMLInputElement)?.value;
         return [...array].map((item) => {
-            const total = item.debtsList.reduce((acc, item) => (acc += Number(item.debt)), 0);
+            const total = item.debtsList.reduce((acc, item) => (acc += Number(item.amount)), 0);
             const isForMe = slider ? total >= 0 : true;
             const isFromLess = from != "" ? Number(from) <= total : true;
             const isToMore = to != "" ? total <= Number(to) : true;

@@ -26,7 +26,7 @@ export function DebtsInputItem({
         >
             <span className="flex items-center gap-1">
                 <Input
-                    placeholder={String(debtClass.debt.debtsList[i].debt)}
+                    placeholder={String(debtClass.debt.debtsList[i].amount)}
                     required={false}
                     type="number"
                     onKeyUp={(event) => {
@@ -45,14 +45,14 @@ export function DebtsInputItem({
                         }
                     }}
                     styleInput={{
-                        width: (String(debtClass.debt.debtsList[i].debt).length + 1) * 16 + 15,
+                        width: (String(debtClass.debt.debtsList[i].amount).length + 1) * 16 + 15,
                     }}
                     styleDiv={{
                         maxWidth: 200,
                     }}
                     onChange={(event) => {
                         const widthValue = (event.target.value.length + 1) * 16 + 15;
-                        const widthPlaceholder = (String(debtClass.debt.debtsList[i].debt).length + 1) * 16 + 15;
+                        const widthPlaceholder = (String(debtClass.debt.debtsList[i].amount).length + 1) * 16 + 15;
                         event.target.style.width =
                             widthValue < widthPlaceholder ? widthPlaceholder + "px" : widthValue + "px";
                     }}

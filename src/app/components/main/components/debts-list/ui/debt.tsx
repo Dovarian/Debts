@@ -22,10 +22,10 @@ export function Debt({ debtClass, debtsClass }: { debtClass: DebtClass; debtsCla
                     <span
                         className={clsx(
                             "font-medium",
-                            debtClass.debt.debtsList[0].debt < 0 ? "text-red-600" : "text-green-600"
+                            debtClass.debt.debtsList[0].amount < 0 ? "text-red-600" : "text-green-600"
                         )}
                     >
-                        {debtClass.debt.debtsList[0].debt}₽
+                        {debtClass.debt.debtsList[0].amount}₽
                     </span>{" "}
                     до {debtClass.debt.debtsList[0].date}
                 </div>

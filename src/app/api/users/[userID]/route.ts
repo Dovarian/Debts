@@ -61,7 +61,6 @@ export async function PUT(req: NextRequest) {
 export async function GET(_: void, { params }: { params: { userID: number } }) {
     try {
         const user_id = Number((await params)?.userID);
-
         return NextResponse.json(
             await prisma.creditors.findMany({
                 where: { user_id },

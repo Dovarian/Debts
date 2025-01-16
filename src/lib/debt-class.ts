@@ -30,7 +30,7 @@ export class DebtClass {
 
     replaceDebt(value: number, i: number) {
         const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList[i].debt = value;
+        newDebts[this._index].debtsList[i].amount = value;
         newDebts[this._index].debtsList[i].defaultEdit = false;
         this._setDebts(newDebts);
     }
@@ -44,14 +44,16 @@ export class DebtClass {
 
     addDebtsListItem() {
         const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList.push({ debt: 0, date: "00.00.0000", defaultEdit: true });
+        newDebts[this._index].debtsList.push({ amount: 0, date: "00.00.0000", defaultEdit: true });
         this._setDebts(newDebts);
     }
 
     delDebtsListItem(index: number) {
-        const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList = newDebts[this._index].debtsList.filter((_, i) => i != index);
-        this._setDebts(newDebts);
+        if (this._debts[this._index].debtsList.length - 1 > 0) {
+            const newDebts = this._debts.slice();
+            newDebts[this._index].debtsList = newDebts[this._index].debtsList.filter((_, i) => i != index);
+            this._setDebts(newDebts);
+        }
     }
 
     sortDebtsList() {
@@ -71,7 +73,7 @@ export class DebtClass {
     }
 
     calcAmount(): number {
-        return this._debts[this._index].debtsList.reduce((acc, item) => (acc += Number(item.debt)), 0);
+        return this._debts[this._index].debtsList.reduce((acc, item) => (acc += Number(item.amount)), 0);
     }
 
     delete(): void {
