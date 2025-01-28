@@ -39,12 +39,16 @@ export function DebtsItem({
                 <div
                     className={clsx(
                         "font-medium whitespace-nowrap",
-                        debtClass.debt.debtsList[index].amount < 0 ? "text-red-600" : "text-green-600"
+                        debtClass.debt.debtsList.find((item) => item.id == index)!.amount < 0
+                            ? "text-red-600"
+                            : "text-green-600"
                     )}
                 >
-                    {debtClass.debt.debtsList[index].amount}₽
+                    {debtClass.debt.debtsList.find((item) => item.id == index)!.amount}₽
                 </div>{" "}
-                <div className="whitespace-nowrap">до {debtClass.debt.debtsList[index].date}</div>
+                <div className="whitespace-nowrap">
+                    до {debtClass.debt.debtsList.find((item) => item.id == index)!.date}
+                </div>
             </span>
             <div
                 className="absolute top-1/5 right-2 text-red-600

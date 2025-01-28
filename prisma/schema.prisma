@@ -12,10 +12,10 @@ model creditors {
   user_id                            Int
   name                               String  @db.VarChar(100)
   avatar                             String  @db.Text
-  users                              users   @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "creditors_ibfk_1")
+  users                              users   @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "creditors_ibfk_1")
   debts_debts_creditor_idTocreditors debts[] @relation("debts_creditor_idTocreditors")
 
-  @@index([user_id], map: "user_id")
+  @@index([user_id], map: "creditors_ibfk_1")
 }
 
 model debts {
@@ -24,11 +24,11 @@ model debts {
   creditor_id                            Int
   amount                                 Int
   date                                   String    @db.VarChar(12)
-  creditors_debts_user_idTocreditors     users     @relation("debts_user_idTocreditors", fields: [user_id], references: [id], onUpdate: Restrict, map: "debts_ibfk_1")
-  creditors_debts_creditor_idTocreditors creditors @relation("debts_creditor_idTocreditors", fields: [creditor_id], references: [id], onUpdate: Restrict, map: "debts_ibfk_2")
+  creditors_debts_user_idTocreditors     users     @relation("debts_user_idTocreditors", fields: [user_id], references: [id], onDelete: Cascade, map: "debts_ibfk_1")
+  creditors_debts_creditor_idTocreditors creditors @relation("debts_creditor_idTocreditors", fields: [creditor_id], references: [id], onDelete: Cascade, map: "debts_ibfk_2")
 
-  @@index([creditor_id], map: "creditor_id")
   @@index([user_id], map: "user_id")
+  @@index([creditor_id], map: "debts_ibfk_2")
 }
 
 model users {

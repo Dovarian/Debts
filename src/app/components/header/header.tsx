@@ -1,14 +1,24 @@
-import avatarSrc from "../../../../public/images/dovarian-avatar.png";
+"use client";
+
+import defaultAvatar from "../../../../public/images/default-avatar.png";
+import { useEffect, useState } from "react";
 import { User } from "../common/user/user";
 import { VertLine } from "../common/vert-line";
 
 export default function Header() {
+    const [image, setImage] = useState<string>(defaultAvatar.src);
+
+    useEffect(() => {
+        const fetchData = async () => {};
+        fetchData();
+    });
+
     return (
         <header className="bg-[--div-bg] py-4 px-8 border-gray-500 shadow flex justify-between items-center mx-[20vw] mt-6">
             <div className="text-5xl">Долги</div>
             <div className="flex items-center gap-10">
                 <VertLine className="h-12" />
-                <User src={avatarSrc} userName="Кирилл В" variability={false} />
+                <User src={image} userName="Кирилл В" variability={false} />
             </div>
         </header>
     );

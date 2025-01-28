@@ -19,8 +19,34 @@ export class DebtsClass {
         return this._setDebts;
     }
 
-    addDebt(debt: DebtsInterface): void {
-        this._setDebts((prev) => [...prev, debt]);
+    addDebt(debt: DebtsInterface) {
+        fetch("http://localhost:3000/api/users/1?type=create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({ name: debt.name, avatar: debt.avatar }),
+        })
+            .then((response) => response.json())
+            .then(async (response) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                debt.id = response.id;
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                debt.userId = response.userId;
+                this._setDebts((prev) => [...prev, debt]);
+
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                await fetch(`http://localhost:3000/api/users/1/${response.id}?type=create`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({ amount: Number(debt.debtsList[0].amount), date: debt.debtsList[0].date }),
+                });
+            });
     }
 
     filter(array: DebtsInterface[]): DebtsInterface[] {

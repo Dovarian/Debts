@@ -15,53 +15,88 @@ export class DebtClass {
     }
 
     get debt(): DebtsInterface {
-        return this._debts[this._index];
+        return this._debts.find((item) => item.id == this._index)!;
     }
 
     get index(): number {
         return this._index;
     }
 
+    get setDebts(): State {
+        return this._setDebts;
+    }
+
     replace(name: string, value: string) {
         const newDebts = this._debts.slice();
-        newDebts[this._index][name] = value;
+        newDebts.find((item) => item.id == this._index)![name] = value;
         this._setDebts(newDebts);
     }
 
     replaceDebt(value: number, i: number) {
         const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList[i].amount = value;
-        newDebts[this._index].debtsList[i].defaultEdit = false;
+        newDebts.find((item) => item.id == this._index)!.debtsList.find((item) => item.id == i)!.amount = value;
+        newDebts.find((item) => item.id == this._index)!.debtsList.find((item) => item.id == i)!.defaultEdit = false;
         this._setDebts(newDebts);
     }
 
     replaceDate(value: string, i: number) {
         const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList[i].date = value;
-        newDebts[this._index].debtsList[i].defaultEdit = false;
+        newDebts.find((item) => item.id == this._index)!.debtsList.find((item) => item.id == i)!.date = value;
+        newDebts.find((item) => item.id == this._index)!.debtsList.find((item) => item.id == i)!.defaultEdit = false;
         this._setDebts(newDebts);
     }
 
-    addDebtsListItem() {
-        const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList.push({ amount: 0, date: "00.00.0000", defaultEdit: true });
-        this._setDebts(newDebts);
+    async addDebtsListItem() {
+        await fetch(`http://localhost:3000/api/users/1/${this._index}?type=create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({ amount: 0, date: "01.01.0000" }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                const newDebts = this._debts.slice();
+                newDebts
+                    .find((item) => item.id == this._index)!
+                    .debtsList.push({
+                        amount: 0,
+                        date: "01.01.0000",
+                        defaultEdit: true,
+                        id: response.id,
+                        creditor_id: this._index,
+                        user_id: 1,
+                    });
+                this._setDebts(newDebts);
+            });
     }
 
-    delDebtsListItem(index: number) {
-        if (this._debts[this._index].debtsList.length - 1 > 0) {
+    async delDebtsListItem(index: number) {
+        if (this._debts.find((item) => item.id == this._index)!.debtsList.length - 1 > 0) {
             const newDebts = this._debts.slice();
-            newDebts[this._index].debtsList = newDebts[this._index].debtsList.filter((_, i) => i != index);
+            newDebts.find((item) => item.id == this._index)!.debtsList = newDebts
+                .find((item) => item.id == this._index)!
+                .debtsList.filter((item) => item.id != index);
             this._setDebts(newDebts);
+
+            await fetch(`http://localhost:3000/api/users/1/${this._index}?type=delete&id=${index}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify({}),
+            });
         }
     }
 
     sortDebtsList() {
         const newDebts = this._debts.slice();
-        newDebts[this._index].debtsList = newDebts[this._index].debtsList.sort(
-            (a, b) => Number(new Date(convertDate(a.date))) - Number(new Date(convertDate(b.date)))
-        );
-        this._setDebts(newDebts);
+        newDebts
+            .find((item) => item.id == this._index)!
+            .debtsList.sort((a, b) => {
+                return Number(new Date(convertDate(a.date))) - Number(new Date(convertDate(b.date)));
+            });
+        return newDebts;
     }
 
     openDebtsList() {
@@ -73,10 +108,20 @@ export class DebtClass {
     }
 
     calcAmount(): number {
-        return this._debts[this._index].debtsList.reduce((acc, item) => (acc += Number(item.amount)), 0);
+        return this._debts
+            .find((item) => item.id == this._index)!
+            .debtsList.reduce((acc, item) => (acc += Number(item.amount)), 0);
     }
 
-    delete(): void {
-        this._setDebts((prev) => prev.filter((_, i) => i != this._index));
+    async delete() {
+        this._setDebts((prev) => prev.filter((item) => item.id != this._index));
+
+        await fetch(`http://localhost:3000/api/users/1?type=delete&id=${this._index}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({}),
+        });
     }
 }

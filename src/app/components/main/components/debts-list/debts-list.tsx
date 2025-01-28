@@ -26,8 +26,8 @@ export function DebtsList({
 
     return (
         <section className="flex flex-col gap-6 mt-20">
-            {debtsClass.debts.map((item, i) => {
-                const debtClass = new DebtClass(debts, setDebts, i);
+            {debtsClass.debts?.map((item, i) => {
+                const debtClass = new DebtClass(debts, setDebts, debtsClass.debts[i].id!);
                 return !item.hidden && <Debt key={i} debtClass={debtClass} debtsClass={debtsClass} />;
             })}
             <span

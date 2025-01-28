@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { DebtClass } from "../../../../lib/debt-class";
 import { Item } from "./ui/item";
-import { convertDate } from "../../../../helpers/helpers";
+import { compareObjects } from "../../../../helpers/helpers";
 import { DebtsClass } from "../../../../lib/debts-class";
 
 export function DebtsListModal({ debtClass, debtsClass }: { debtClass: DebtClass; debtsClass: DebtsClass }) {
@@ -16,15 +16,17 @@ export function DebtsListModal({ debtClass, debtsClass }: { debtClass: DebtClass
     };
 
     if (
-        debtClass.debt.debtsList.sort(
-            (a, b) => Number(new Date(convertDate(a.date))) - Number(new Date(convertDate(b.date)))
-        ) != debtClass.debt.debtsList
+        !compareObjects(
+            debtClass.sortDebtsList().find((item) => item.id == debtClass.index)!.debtsList,
+            debtClass.debt.debtsList
+        )
     ) {
-        debtClass.sortDebtsList();
+        debtClass.setDebts(debtClass.sortDebtsList());
     }
 
     useEffect(() => {
         document.addEventListener("click", closeModal);
+
         return () => {
             document.removeEventListener("click", closeModal);
         };
@@ -36,7 +38,13 @@ export function DebtsListModal({ debtClass, debtsClass }: { debtClass: DebtClass
             id={`debtsList-${debtClass.index}`}
         >
             {debtClass.debt.debtsList.map((item, i) => (
-                <Item basicEdit={item.defaultEdit} i={i} debtClass={debtClass} key={i} debtsClass={debtsClass} />
+                <Item
+                    basicEdit={item.defaultEdit}
+                    i={debtClass.debt.debtsList[i].id!}
+                    debtClass={debtClass}
+                    key={i}
+                    debtsClass={debtsClass}
+                />
             ))}
             <div
                 className="py-2 px-4 border flex justify-center items-center

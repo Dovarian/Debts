@@ -1,14 +1,17 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
 export interface DebtsInterface {
     [index: string]: unknown;
-    avatar: StaticImport | string;
+    avatar: string;
     name: string;
     debtsList: DebtsList[];
     hidden: boolean;
+    id?: number;
+    userId?: number;
 }
 
 interface DebtsList {
+    id?: number;
+    user_id?: number;
+    creditor_id?: number;
     amount: number;
     date: string;
     defaultEdit: boolean;

@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { Name } from "./ui/name";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { Avatar } from "./ui/avatar";
 import { DebtClass } from "../../../../lib/debt-class";
 
@@ -10,7 +9,7 @@ export function User({
     debtClass,
     variability = false,
 }: {
-    src: StaticImport | string;
+    src: string;
     userName: string;
     debtClass?: DebtClass;
     variability: boolean;

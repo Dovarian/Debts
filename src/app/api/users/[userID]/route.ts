@@ -9,6 +9,7 @@ export async function POST(req: NextRequest, { params }: { params: { userID: num
         const type = String(req.nextUrl.searchParams.get("type"));
         const id = Number(req.nextUrl.searchParams.get("id"));
         const body = await req.json();
+        console.log(body);
 
         if (type == "create") {
             return NextResponse.json(

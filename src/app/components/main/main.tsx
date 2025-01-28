@@ -1,15 +1,22 @@
 "use client";
 
-import { debtsConstant } from "../../../constants/debts";
 import { DebtsInterface } from "../../../interfaces/interfaces";
 import { DebtsClass } from "../../../lib/debts-class";
 import { DebtsList } from "./components/debts-list/debts-list";
 import { Filters } from "./components/filters/filters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Main({}) {
-    const [debts, setDebts] = useState<DebtsInterface[]>(debtsConstant);
+    const [debts, setDebts] = useState<DebtsInterface[]>([]);
     const debtsClass = new DebtsClass(debts, setDebts);
+
+    useEffect(() => {
+        async function fetchData() {
+            const debtsFetch = (await fetch("http://localhost:3000/api/users/1/transform")).json();
+            setDebts(await debtsFetch);
+        }
+        fetchData();
+    }, []);
 
     return (
         <main className="mx-[20vw] mt-24">

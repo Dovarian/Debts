@@ -22,13 +22,11 @@ export async function GET(_: string, { params }: { params: { userID: number } })
             },
         });
 
-        const creditor_id = await result[0].id;
-
         result = await Promise.all(
             result.map(async (creditor) => {
                 const debts: debtsI[] = await prisma.debts.findMany({
                     where: {
-                        creditor_id: creditor_id,
+                        creditor_id: creditor.id,
                     },
                 });
                 debts.map((debt) => {

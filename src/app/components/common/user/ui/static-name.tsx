@@ -14,7 +14,7 @@ export function StaticName({
     return (
         <span
             className={clsx("group flex items-center gap-1 whitespace-nowrap", variability && "cursor-pointer")}
-            onClick={() => setEdit(true)}
+            onClick={() => variability && setEdit(true)}
         >
             <span className="max-w-80 overflow-x-auto">{name}</span>
             <Image
