@@ -54,11 +54,46 @@ export async function PUT(req: NextRequest) {
     }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    const email = String(req?.nextUrl.searchParams.get("email"));
+    const password = String(req?.nextUrl.searchParams.get("password"));
+
+    console.log(email);
+    console.log(password);
+
     try {
-        return NextResponse.json(await prisma.users.findMany(), {
-            status: 200,
-        });
+        if (email != "null" && password != "null") {
+            return NextResponse.json(
+                !!(await prisma.users.findUnique({ where: { email, password } }))
+                    ? await prisma.users.findUnique({ where: { email, password } })
+                    : null,
+                {
+                    status: 200,
+                }
+            );
+        } else if (email != "null") {
+            return NextResponse.json(
+                !!(await prisma.users.findUnique({ where: { email } }))
+                    ? await prisma.users.findUnique({ where: { email } })
+                    : null,
+                {
+                    status: 200,
+                }
+            );
+        } else if (password != "null") {
+            return NextResponse.json(
+                !!(await prisma.users.findMany({ where: { password } }))
+                    ? await prisma.users.findMany({ where: { password } })
+                    : null,
+                {
+                    status: 200,
+                }
+            );
+        } else {
+            return NextResponse.json(await prisma.users.findMany(), {
+                status: 200,
+            });
+        }
     } catch (error) {
         return NextResponse.json(
             { error: error },

@@ -5,10 +5,12 @@ type State = React.Dispatch<React.SetStateAction<DebtsInterface[]>>;
 export class DebtsClass {
     _debts: DebtsInterface[];
     _setDebts: State;
+    _userID: number | null;
 
-    constructor(debts: DebtsInterface[], setDebts: State) {
+    constructor(debts: DebtsInterface[], setDebts: State, userID: number | null) {
         this._debts = debts;
         this._setDebts = setDebts;
+        this._userID = userID;
     }
 
     get debts(): DebtsInterface[] {
@@ -19,8 +21,12 @@ export class DebtsClass {
         return this._setDebts;
     }
 
+    get userID(): number | null {
+        return this._userID;
+    }
+
     addDebt(debt: DebtsInterface) {
-        fetch("http://localhost:3000/api/users/1?type=create", {
+        fetch(`http://localhost:3000/api/users/${this._userID}?type=create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -39,7 +45,7 @@ export class DebtsClass {
 
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                await fetch(`http://localhost:3000/api/users/1/${response.id}?type=create`, {
+                await fetch(`http://localhost:3000/api/users/${this._userID}/${response.id}?type=create`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json;charset=utf-8",

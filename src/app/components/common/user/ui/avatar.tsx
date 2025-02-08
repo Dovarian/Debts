@@ -4,8 +4,9 @@ import Image from "next/image";
 import clsx from "clsx";
 import { DebtClass } from "../../../../../lib/debt-class";
 import editIcon2Src from "../../../../../../public/icons/edit-icon-2.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { encodeImageFileAsURL, getCompressImage } from "../../../../../helpers/helpers";
+import defaultAvatar from "../../../../../../public/images/default-avatar.png";
 
 export function Avatar({
     src,
@@ -16,12 +17,21 @@ export function Avatar({
     variability: boolean;
     debtClass?: DebtClass;
 }) {
-    const [image, setImage] = useState<string>(src);
+    const [image, setImage] = useState<string>(src || defaultAvatar.src);
     const labelVariability = !variability ? { htmlFor: "htmlFor" } : "";
+    useEffect(() => {
+        setImage(src || defaultAvatar.src);
+    }, [src]);
 
     return (
         <label {...labelVariability} className={clsx("group relative w-10 h-10", variability && "cursor-pointer")}>
-            <Image src={image} alt="avatar" height={40} width={40} className="rounded-full h-10 w-10 resize-none" />
+            <Image
+                src={image || defaultAvatar.src}
+                alt="avatar"
+                height={40}
+                width={40}
+                className="rounded-full h-10 w-10 resize-none"
+            />
             <Image
                 src={editIcon2Src}
                 alt="edit"

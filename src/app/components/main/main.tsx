@@ -6,17 +6,19 @@ import { DebtsList } from "./components/debts-list/debts-list";
 import { Filters } from "./components/filters/filters";
 import { useEffect, useState } from "react";
 
-export function Main({}) {
+export function Main({ userID }: { userID: number | null }) {
     const [debts, setDebts] = useState<DebtsInterface[]>([]);
-    const debtsClass = new DebtsClass(debts, setDebts);
+    const debtsClass = new DebtsClass(debts, setDebts, userID);
 
     useEffect(() => {
         async function fetchData() {
-            const debtsFetch = (await fetch("http://localhost:3000/api/users/1/transform")).json();
-            setDebts(await debtsFetch);
+            if (userID != null) {
+                const debtsFetch = (await fetch(`http://localhost:3000/api/users/${userID}/transform`)).json();
+                setDebts(await debtsFetch);
+            }
         }
         fetchData();
-    }, []);
+    }, [userID]);
 
     return (
         <main className="mx-[20vw] mt-24">

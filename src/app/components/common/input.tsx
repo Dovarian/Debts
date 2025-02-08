@@ -23,6 +23,8 @@ export function Input({
     onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }) {
+    const requiredProp = required ? { required: true } : {};
+
     return (
         <div className="relative overflow-x-auto" style={styleDiv}>
             <input
@@ -34,6 +36,7 @@ export function Input({
                 style={styleInput}
                 onKeyUp={onKeyUp}
                 onChange={onChange}
+                {...requiredProp}
             />
             <Image className={clsx(required ? "absolute top-2 right-2" : "hidden")} src={starIcon} alt="star" />
         </div>

@@ -7,11 +7,13 @@ export class DebtClass {
     _debts: DebtsInterface[];
     _setDebts: State;
     _index: number;
+    _userID: number | null;
 
-    constructor(debts: DebtsInterface[], setDebts: State, i: number) {
+    constructor(debts: DebtsInterface[], setDebts: State, i: number, userID: number | null) {
         this._debts = debts;
         this._setDebts = setDebts;
         this._index = i;
+        this._userID = userID;
     }
 
     get debt(): DebtsInterface {
@@ -47,7 +49,7 @@ export class DebtClass {
     }
 
     async addDebtsListItem() {
-        await fetch(`http://localhost:3000/api/users/1/${this._index}?type=create`, {
+        await fetch(`http://localhost:3000/api/users/${this._userID}/${this._index}?type=create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -79,7 +81,7 @@ export class DebtClass {
                 .debtsList.filter((item) => item.id != index);
             this._setDebts(newDebts);
 
-            await fetch(`http://localhost:3000/api/users/1/${this._index}?type=delete&id=${index}`, {
+            await fetch(`http://localhost:3000/api/users/${this._userID}/${this._index}?type=delete&id=${index}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;charset=utf-8",
@@ -116,7 +118,7 @@ export class DebtClass {
     async delete() {
         this._setDebts((prev) => prev.filter((item) => item.id != this._index));
 
-        await fetch(`http://localhost:3000/api/users/1?type=delete&id=${this._index}`, {
+        await fetch(`http://localhost:3000/api/users/${this._userID}?type=delete&id=${this._index}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",

@@ -34,8 +34,9 @@ model debts {
 model users {
   id                             Int         @unique(map: "id") @default(autoincrement())
   username                       String      @db.VarChar(100)
-  email                          String?     @db.VarChar(100)
-  phone                          String?     @db.VarChar(100)
+  password                       String?     @db.VarChar(100)
+  avatar                         String      @db.Text
+  email                          String?     @unique(map: "email") @db.VarChar(100)
   creditors                      creditors[]
   debts_debts_user_idTocreditors debts[]     @relation("debts_user_idTocreditors")
 }

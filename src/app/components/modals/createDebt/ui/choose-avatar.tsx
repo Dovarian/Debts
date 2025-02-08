@@ -15,11 +15,7 @@ export function ChooseAvatar({ avatar, ...props }: { avatar: string; name: strin
                     accept="image/*"
                     onChange={async (event) => {
                         if (event.target.files && event.target.files[0]) {
-                            console.log(await getCompressImage(event.target.files[0]));
-
                             encodeImageFileAsURL(await getCompressImage(event.target.files[0]), (reader) => {
-                                console.log(reader.result);
-
                                 setImage(reader.result as string);
                             });
                         }
