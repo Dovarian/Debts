@@ -28,7 +28,14 @@ export default function Header({ userID }: { userID: number | null }) {
             {session.status == "authenticated" && (
                 <div className="flex items-center gap-10">
                     <VertLine className="h-12" />
-                    <User src={userData.avatar} userName={userData.userName} variability={false} />
+                    <Link href="/profile">
+                        <User
+                            src={userData.avatar}
+                            userName={userData.userName}
+                            variability={false}
+                            avatarClassName="cursor-pointer"
+                        />
+                    </Link>
                     <VertLine className="h-12" />
                     <Link
                         href="#"

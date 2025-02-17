@@ -9,6 +9,8 @@ export async function POST(req: NextRequest) {
         const id = Number(req.nextUrl.searchParams.get("id"));
         const type = String(req.nextUrl.searchParams.get("type"));
 
+        console.log(body);
+
         if (type == "create") {
             return NextResponse.json(
                 await prisma.users.create({
@@ -57,9 +59,6 @@ export async function PUT(req: NextRequest) {
 export async function GET(req: NextRequest) {
     const email = String(req?.nextUrl.searchParams.get("email"));
     const password = String(req?.nextUrl.searchParams.get("password"));
-
-    console.log(email);
-    console.log(password);
 
     try {
         if (email != "null" && password != "null") {

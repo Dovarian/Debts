@@ -64,7 +64,7 @@ export function SignInForm() {
                 </Button>
             </form>
             <span className="text-xl">или</span>
-            <MessengerButton messenger="yandex" className="text-slate-100 bg-red-500 hover:shadow-lg">
+            <MessengerButton messenger="yandex" className="text-slate-800 bg-red-500 hover:shadow-md">
                 Войти с помощью Яндекса
             </MessengerButton>
         </div>

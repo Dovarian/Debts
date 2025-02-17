@@ -15,6 +15,8 @@ export default function Home() {
 
         async function fetchData() {
             if (session.status == "authenticated") {
+                console.log(session.data.user);
+
                 const user = await (
                     await fetch(`http://localhost:3000/api/users?email=${session.data.user?.email}`)
                 ).json();
@@ -38,8 +40,6 @@ export default function Home() {
         }
         fetchData();
     }, [session]);
-
-    console.log(session.data);
 
     return (
         <div>

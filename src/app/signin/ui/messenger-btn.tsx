@@ -13,6 +13,7 @@ export function MessengerButton({
 }) {
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get("callbackUrl") || "/";
+    console.log(children);
 
     return (
         <button

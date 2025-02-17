@@ -34,7 +34,6 @@ export const authConfig: AuthOptions = {
                     // @ts-ignore
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const { password, ...userWithoutPass } = currentUser;
-                    console.log(password);
 
                     return userWithoutPass;
                 }
@@ -49,16 +48,11 @@ export const authConfig: AuthOptions = {
     },
 
     callbacks: {
-        async jwt({ token, account, user }) {
-            if (account) {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                token.name = user.username;
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                token.picture = user.avatar;
+        async jwt({ token, user }) {
+            if (user) {
+                token.name = user.name;
+                token.picture = user.image;
             }
-
             return token;
         },
 

@@ -12,10 +12,16 @@ export function Avatar({
     src,
     variability = false,
     debtClass,
+    className,
+    type,
+    userID,
 }: {
     src: string;
     variability: boolean;
     debtClass?: DebtClass;
+    className?: string;
+    type?: "user" | "creditor";
+    userID?: number | null;
 }) {
     const [image, setImage] = useState<string>(src || defaultAvatar.src);
     const labelVariability = !variability ? { htmlFor: "htmlFor" } : "";
@@ -24,7 +30,10 @@ export function Avatar({
     }, [src]);
 
     return (
-        <label {...labelVariability} className={clsx("group relative w-10 h-10", variability && "cursor-pointer")}>
+        <label
+            {...labelVariability}
+            className={clsx("group relative w-10 h-10", className, variability && "cursor-pointer")}
+        >
             <Image
                 src={image || defaultAvatar.src}
                 alt="avatar"
@@ -48,16 +57,26 @@ export function Avatar({
                         encodeImageFileAsURL(await getCompressImage(event.target.files[0]), async (reader) => {
                             const res = reader.result as string;
                             setImage(res);
-                            debtClass?.replace("avatar", res);
-                            await fetch(`http://localhost:3000/api/users/1?id=${debtClass?.index}`, {
-                                method: "PUT",
-                                headers: {
-                                    "Content-Type": "application/json;charset=utf-8",
-                                },
-                                body: JSON.stringify({
-                                    avatar: res,
-                                }),
-                            });
+                            if (type == "creditor") {
+                                debtClass?.replace("avatar", res);
+                                await fetch(`http://localhost:3000/api/users/1?id=${debtClass?.index}`, {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json;charset=utf-8",
+                                    },
+                                    body: JSON.stringify({
+                                        avatar: res,
+                                    }),
+                                });
+                            } else {
+                                await fetch(`http://localhost:3000/api/users?id=${userID}`, {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json;charset=utf-8",
+                                    },
+                                    body: JSON.stringify({ avatar: res }),
+                                });
+                            }
                         });
                     }
                 }}
