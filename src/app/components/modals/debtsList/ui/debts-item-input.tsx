@@ -29,6 +29,7 @@ export function DebtsInputItem({
                     placeholder={String(debtClass.debt.debtsList.find((item) => item.id == i)!.amount)}
                     required={false}
                     type="number"
+                    maxWidth={300}
                     onKeyUp={async (event) => {
                         if (event.key == "Enter") {
                             const fetchData: { amount?: number; date?: string } = {};
@@ -56,22 +57,22 @@ export function DebtsInputItem({
                             });
                         }
                     }}
-                    styleInput={{
-                        width:
-                            (String(debtClass.debt.debtsList.find((item) => item.id == i)!.amount).length + 1) * 16 +
-                            15,
-                    }}
-                    styleDiv={{
-                        maxWidth: 200,
-                    }}
-                    onChange={(event) => {
-                        const widthValue = (event.target.value.length + 1) * 16 + 15;
-                        const widthPlaceholder =
-                            (String(debtClass.debt.debtsList.find((item) => item.id == i)!.amount).length + 1) * 16 +
-                            15;
-                        event.target.style.width =
-                            widthValue < widthPlaceholder ? widthPlaceholder + "px" : widthValue + "px";
-                    }}
+                    // styleInput={{
+                    //     width:
+                    //         (String(debtClass.debt.debtsList.find((item) => item.id == i)!.amount).length + 1) * 16 +
+                    //         15,
+                    // }}
+                    // styleDiv={{
+                    //     maxWidth: 200,
+                    // }}
+                    // onChange={(event) => {
+                    //     const widthValue = (event.target.value.length + 1) * 16 + 15;
+                    //     const widthPlaceholder =
+                    //         (String(debtClass.debt.debtsList.find((item) => item.id == i)!.amount).length + 1) * 16 +
+                    //         15;
+                    //     event.target.style.width =
+                    //         widthValue < widthPlaceholder ? widthPlaceholder + "px" : widthValue + "px";
+                    // }}
                 />
                 ₽
             </span>
@@ -81,7 +82,6 @@ export function DebtsInputItem({
                     defaultValue={convertDate(debtClass.debt.debtsList.find((item) => item.id == i)!.date)}
                     required={false}
                     type="date"
-                    className="w-[180px]"
                     onKeyUp={async (event) => {
                         if (event.key == "Enter") {
                             const fetchData: { amount?: number; date?: string } = {};
