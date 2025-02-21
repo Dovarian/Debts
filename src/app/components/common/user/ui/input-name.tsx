@@ -50,12 +50,6 @@ export function InputName({
                         setEdit(false);
                     }
                 }}
-                styleInput={{
-                    width: (placeholder.length + 1) * 16,
-                }}
-                styleDiv={{
-                    maxWidth: 320,
-                }}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => getAdaptiveSize(event, 16, placeholder)}
             />
         </span>
