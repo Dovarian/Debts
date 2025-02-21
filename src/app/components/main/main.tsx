@@ -13,7 +13,7 @@ export function Main({ userID }: { userID: number | null }) {
     useEffect(() => {
         async function fetchData() {
             if (userID != null) {
-                const debtsFetch = (await fetch(`${window.location.host}/api/users/${userID}/transform`)).json();
+                const debtsFetch = (await fetch(`${window.location.origin}/api/users/${userID}/transform`)).json();
                 setDebts(await debtsFetch);
             }
         }

@@ -48,7 +48,7 @@ export function DebtsInputItem({
                             setEdit(false);
                             debtsClass.setDebts((prev) => debtsClass.filter(prev));
 
-                            await fetch(`${window.location.host}/api/users/1/${debtClass.index}?id=${i}`, {
+                            await fetch(`${window.location.origin}/api/users/1/${debtClass.index}?id=${i}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json;charset=utf-8",
@@ -99,7 +99,7 @@ export function DebtsInputItem({
                             }
                             setEdit(false);
                             debtsClass.setDebts((prev) => debtsClass.filter(prev));
-                            await fetch(`${window.location.host}/api/users/1/${debtClass.index}?id=${i}`, {
+                            await fetch(`${window.location.origin}/api/users/1/${debtClass.index}?id=${i}`, {
                                 method: "PUT",
                                 headers: {
                                     "Content-Type": "application/json;charset=utf-8",

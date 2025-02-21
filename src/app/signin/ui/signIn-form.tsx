@@ -36,7 +36,7 @@ export function SignInForm() {
                         const email = (form[0].children[1].children[0] as HTMLInputElement).value;
                         const password = (form[1].children[1].children[0] as HTMLInputElement).value;
                         const userPassword = (
-                            await (await fetch(`${window.location.host}/api/users?email=${email}`)).json()
+                            await (await fetch(`${window.location.origin}/api/users?email=${email}`)).json()
                         )?.password;
 
                         if (
@@ -44,7 +44,7 @@ export function SignInForm() {
                             (await bcrypt.compare(
                                 password,
                                 (
-                                    await (await fetch(`${window.location.host}/api/users?email=${email}`)).json()
+                                    await (await fetch(`${window.location.origin}/api/users?email=${email}`)).json()
                                 )?.password
                             ))
                         ) {

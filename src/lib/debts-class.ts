@@ -26,7 +26,7 @@ export class DebtsClass {
     }
 
     addDebt(debt: DebtsInterface) {
-        fetch(`${window.location.host}/api/users/${this._userID}?type=create`, {
+        fetch(`${window.location.origin}/api/users/${this._userID}?type=create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -45,7 +45,7 @@ export class DebtsClass {
 
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                await fetch(`${window.location.host}/api/users/${this._userID}/${response.id}?type=create`, {
+                await fetch(`${window.location.origin}/api/users/${this._userID}/${response.id}?type=create`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json;charset=utf-8",
