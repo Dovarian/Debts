@@ -16,6 +16,7 @@ export default function Profile() {
     const [myDebts, setMyDebts] = useState(0);
     const [debtsToMe, setDebtsToMe] = useState(0);
     const session = useSession();
+    console.log(window.location.host);
 
     useEffect(() => {
         const usersClass = new UsersClass();
@@ -23,10 +24,10 @@ export default function Profile() {
         async function fetchData() {
             if (session.status == "authenticated") {
                 setUser(
-                    await (await fetch(`${process.env.DOMAIN}/api/users?email=${session.data.user?.email}`)).json()
+                    await (await fetch(`${window.location.host}/api/users?email=${session.data.user?.email}`)).json()
                 );
                 const user = await (
-                    await fetch(`${process.env.DOMAIN}/api/users?email=${session.data.user?.email}`)
+                    await fetch(`${window.location.host}/api/users?email=${session.data.user?.email}`)
                 ).json();
 
                 const userID = await user.id;
@@ -45,10 +46,10 @@ export default function Profile() {
                     setUserID(newUser.id);
                 }
 
-                const credentials = await (await fetch(`${process.env.DOMAIN}/api/users/${userID}`)).json();
+                const credentials = await (await fetch(`${window.location.host}/api/users/${userID}`)).json();
                 for (const credential of credentials) {
                     const debt = await (
-                        await fetch(`${process.env.DOMAIN}/api/users/${userID}/${credential.id}`)
+                        await fetch(`${window.location.host}/api/users/${userID}/${credential.id}`)
                     ).json();
 
                     const credentialAmount = [...debt].reduce((acc: number, item: debts) => acc + item.amount, 0);
@@ -110,7 +111,7 @@ export default function Profile() {
                     <button
                         onClick={async () => {
                             console.log(
-                                await fetch(`${process.env.DOMAIN}/api/users?type=delete&id=${userID}`, {
+                                await fetch(`${window.location.host}/api/users?type=delete&id=${userID}`, {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json;charset=utf-8",

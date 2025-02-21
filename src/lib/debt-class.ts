@@ -49,7 +49,7 @@ export class DebtClass {
     }
 
     async addDebtsListItem() {
-        await fetch(`${process.env.DOMAIN}/api/users/${this._userID}/${this._index}?type=create`, {
+        await fetch(`${window.location.host}/api/users/${this._userID}/${this._index}?type=create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -81,7 +81,7 @@ export class DebtClass {
                 .debtsList.filter((item) => item.id != index);
             this._setDebts(newDebts);
 
-            await fetch(`${process.env.DOMAIN}/api/users/${this._userID}/${this._index}?type=delete&id=${index}`, {
+            await fetch(`${window.location.host}/api/users/${this._userID}/${this._index}?type=delete&id=${index}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;charset=utf-8",
@@ -118,7 +118,7 @@ export class DebtClass {
     async delete() {
         this._setDebts((prev) => prev.filter((item) => item.id != this._index));
 
-        await fetch(`${process.env.DOMAIN}/api/users/${this._userID}?type=delete&id=${this._index}`, {
+        await fetch(`${window.location.host}/api/users/${this._userID}?type=delete&id=${this._index}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
