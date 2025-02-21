@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: NextRequest, { params }: { params: { creditorID: number; userID: number } }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ creditorID: number; userID: number }> }) {
     try {
         const creditor_id = Number((await params)?.creditorID);
         const user_id = Number((await params)?.userID);
