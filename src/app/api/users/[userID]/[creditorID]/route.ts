@@ -60,7 +60,7 @@ export async function PUT(req: NextRequest) {
     }
 }
 
-export async function GET(_: NextRequest, { params }: { params: { creditorID: number } }) {
+export async function GET(_: NextRequest, { params }: { params: Promise<{ creditorID: number }> }) {
     try {
         const creditor_id = Number((await params)?.creditorID);
 
