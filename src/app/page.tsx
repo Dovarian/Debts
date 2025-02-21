@@ -18,7 +18,7 @@ export default function Home() {
                 console.log(session.data.user);
 
                 const user = await (
-                    await fetch(`http://localhost:3000/api/users?email=${session.data.user?.email}`)
+                    await fetch(`${process.env.DOMAIN}/api/users?email=${session.data.user?.email}`)
                 ).json();
 
                 if (!!(await user)?.email) {

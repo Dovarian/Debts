@@ -57,11 +57,11 @@ export function RegistrationForm() {
                     if (username && password && confirmPassword && email) {
                         if (password == confirmPassword) {
                             if (
-                                (await (await fetch(`http://localhost:3000/api/users?email=${email}`)).json()) == null
+                                (await (await fetch(`${process.env.DOMAIN}/api/users?email=${email}`)).json()) == null
                             ) {
                                 setError("");
                                 const hashPassword = await bcrypt.hash(password, 10);
-                                await fetch(`http://localhost:3000/api/users?type=create`, {
+                                await fetch(`${process.env.DOMAIN}/api/users?type=create`, {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json;charset=utf-8",

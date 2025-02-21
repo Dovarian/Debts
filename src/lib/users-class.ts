@@ -10,7 +10,7 @@ export class UsersClass {
         password?: string;
         avatar?: string;
     }) {
-        return await fetch("http://localhost:3000/api/users?type=create", {
+        return await fetch(`${process.env.DOMAIN}/api/users?type=create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",

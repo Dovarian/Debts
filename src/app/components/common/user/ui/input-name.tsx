@@ -30,7 +30,7 @@ export function InputName({
                             setUsername(username);
                             if (type == "creditor") {
                                 debtClass?.replace("name", username);
-                                await fetch(`http://localhost:3000/api/users/${userID}?id=${debtClass?.index}`, {
+                                await fetch(`${process.env.DOMAIN}/api/users/${userID}?id=${debtClass?.index}`, {
                                     method: "PUT",
                                     headers: {
                                         "Content-Type": "application/json;charset=utf-8",
@@ -38,7 +38,7 @@ export function InputName({
                                     body: JSON.stringify({ name: username }),
                                 });
                             } else {
-                                await fetch(`http://localhost:3000/api/users?id=${userID}`, {
+                                await fetch(`${process.env.DOMAIN}/api/users?id=${userID}`, {
                                     method: "PUT",
                                     headers: {
                                         "Content-Type": "application/json;charset=utf-8",

@@ -13,7 +13,7 @@ export default function Header({ userID }: { userID: number | null }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = (await (await fetch("http://localhost:3000/api/users")).json()).find(
+            const data = (await (await fetch(`${process.env.DOMAIN}/api/users`)).json()).find(
                 (item: DebtsInterface) => item.id == userID
             );
 

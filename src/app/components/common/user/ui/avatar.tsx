@@ -59,7 +59,7 @@ export function Avatar({
                             setImage(res);
                             if (type == "creditor") {
                                 debtClass?.replace("avatar", res);
-                                await fetch(`http://localhost:3000/api/users/1?id=${debtClass?.index}`, {
+                                await fetch(`${process.env.DOMAIN}/api/users/1?id=${debtClass?.index}`, {
                                     method: "PUT",
                                     headers: {
                                         "Content-Type": "application/json;charset=utf-8",
@@ -69,7 +69,7 @@ export function Avatar({
                                     }),
                                 });
                             } else {
-                                await fetch(`http://localhost:3000/api/users?id=${userID}`, {
+                                await fetch(`${process.env.DOMAIN}/api/users?id=${userID}`, {
                                     method: "PUT",
                                     headers: {
                                         "Content-Type": "application/json;charset=utf-8",
