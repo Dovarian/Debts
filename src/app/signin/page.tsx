@@ -1,5 +1,3 @@
-"use client";
-
 import { RegistrationForm } from "./ui/registration-form";
 import { SignInForm } from "./ui/signIn-form";
 
