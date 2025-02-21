@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -13,7 +13,7 @@ interface debtsI {
     defaultEdit?: boolean;
 }
 
-export async function GET(_: string, { params }: { params: { userID: number } }) {
+export async function GET(_: NextRequest, { params }: { params: Promise<{ userID: number }> }) {
     try {
         const user_id = Number((await params)?.userID);
         let result = await prisma.creditors.findMany({
