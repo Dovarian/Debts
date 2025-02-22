@@ -16,7 +16,6 @@ export default function Profile() {
     const [myDebts, setMyDebts] = useState(0);
     const [debtsToMe, setDebtsToMe] = useState(0);
     const session = useSession();
-    console.log(window.location);
 
     useEffect(() => {
         const usersClass = new UsersClass();
