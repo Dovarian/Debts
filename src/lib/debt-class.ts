@@ -49,13 +49,18 @@ export class DebtClass {
     }
 
     async addDebtsListItem() {
-        await fetch(`${window.location.origin}/api/users/${this._userID}/${this._index}?type=create`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({ amount: 0, date: "01.01.0000" }),
-        })
+        await fetch(
+            `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users/${
+                this._userID
+            }/${this._index}?type=create`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify({ amount: 0, date: "01.01.0000" }),
+            }
+        )
             .then((response) => response.json())
             .then((response) => {
                 const newDebts = this._debts.slice();
@@ -81,13 +86,18 @@ export class DebtClass {
                 .debtsList.filter((item) => item.id != index);
             this._setDebts(newDebts);
 
-            await fetch(`${window.location.origin}/api/users/${this._userID}/${this._index}?type=delete&id=${index}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json;charset=utf-8",
-                },
-                body: JSON.stringify({}),
-            });
+            await fetch(
+                `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users/${
+                    this._userID
+                }/${this._index}?type=delete&id=${index}`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify({}),
+                }
+            );
         }
     }
 
@@ -118,12 +128,17 @@ export class DebtClass {
     async delete() {
         this._setDebts((prev) => prev.filter((item) => item.id != this._index));
 
-        await fetch(`${window.location.origin}/api/users/${this._userID}?type=delete&id=${this._index}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({}),
-        });
+        await fetch(
+            `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users/${
+                this._userID
+            }?type=delete&id=${this._index}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify({}),
+            }
+        );
     }
 }

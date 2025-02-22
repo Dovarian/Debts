@@ -18,7 +18,11 @@ export default function Home() {
                 console.log(session.data.user);
 
                 const user = await (
-                    await fetch(`${window.location.origin}/api/users?email=${session.data.user?.email}`)
+                    await fetch(
+                        `${
+                            typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                        }/api/users?email=${session.data.user?.email}`
+                    )
                 ).json();
 
                 if (!!(await user)?.email) {

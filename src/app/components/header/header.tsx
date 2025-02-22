@@ -13,9 +13,13 @@ export default function Header({ userID }: { userID: number | null }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = (await (await fetch(`${window.location.origin}/api/users`)).json()).find(
-                (item: DebtsInterface) => item.id == userID
-            );
+            const data = (
+                await (
+                    await fetch(
+                        `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users`
+                    )
+                ).json()
+            ).find((item: DebtsInterface) => item.id == userID);
 
             setUserData({ avatar: (await data)?.avatar, userName: (await data)?.username });
         };

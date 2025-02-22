@@ -26,13 +26,18 @@ export class DebtsClass {
     }
 
     addDebt(debt: DebtsInterface) {
-        fetch(`${window.location.origin}/api/users/${this._userID}?type=create`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({ name: debt.name, avatar: debt.avatar }),
-        })
+        fetch(
+            `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users/${
+                this._userID
+            }?type=create`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify({ name: debt.name, avatar: debt.avatar }),
+            }
+        )
             .then((response) => response.json())
             .then(async (response) => {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -45,13 +50,21 @@ export class DebtsClass {
 
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                await fetch(`${window.location.origin}/api/users/${this._userID}/${response.id}?type=create`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json;charset=utf-8",
-                    },
-                    body: JSON.stringify({ amount: Number(debt.debtsList[0].amount), date: debt.debtsList[0].date }),
-                });
+                await fetch(
+                    `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users/${
+                        this._userID
+                    }/${response.id}?type=create`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json;charset=utf-8",
+                        },
+                        body: JSON.stringify({
+                            amount: Number(debt.debtsList[0].amount),
+                            date: debt.debtsList[0].date,
+                        }),
+                    }
+                );
             });
     }
 

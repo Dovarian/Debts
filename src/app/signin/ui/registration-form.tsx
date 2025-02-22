@@ -57,23 +57,35 @@ export function RegistrationForm() {
                     if (username && password && confirmPassword && email) {
                         if (password == confirmPassword) {
                             if (
-                                (await (await fetch(`${window.location.origin}/api/users?email=${email}`)).json()) ==
-                                null
+                                (await (
+                                    await fetch(
+                                        `${
+                                            typeof window !== "undefined"
+                                                ? window.location.origin
+                                                : "http://localhost:3000"
+                                        }/api/users?email=${email}`
+                                    )
+                                ).json()) == null
                             ) {
                                 setError("");
                                 const hashPassword = await bcrypt.hash(password, 10);
-                                await fetch(`${window.location.origin}/api/users?type=create`, {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json;charset=utf-8",
-                                    },
-                                    body: JSON.stringify({
-                                        username,
-                                        email,
-                                        password: hashPassword,
-                                        avatar: "",
-                                    }),
-                                });
+                                await fetch(
+                                    `${
+                                        typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                    }/api/users?type=create`,
+                                    {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json;charset=utf-8",
+                                        },
+                                        body: JSON.stringify({
+                                            username,
+                                            email,
+                                            password: hashPassword,
+                                            avatar: "",
+                                        }),
+                                    }
+                                );
                                 const res = await signIn("credentials", {
                                     email,
                                     password: hashPassword,

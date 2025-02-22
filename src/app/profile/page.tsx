@@ -24,10 +24,20 @@ export default function Profile() {
         async function fetchData() {
             if (session.status == "authenticated") {
                 setUser(
-                    await (await fetch(`${window.location.origin}/api/users?email=${session.data.user?.email}`)).json()
+                    await (
+                        await fetch(
+                            `${
+                                typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                            }/api/users?email=${session.data.user?.email}`
+                        )
+                    ).json()
                 );
                 const user = await (
-                    await fetch(`${window.location.origin}/api/users?email=${session.data.user?.email}`)
+                    await fetch(
+                        `${
+                            typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                        }/api/users?email=${session.data.user?.email}`
+                    )
                 ).json();
 
                 const userID = await user.id;
@@ -46,10 +56,20 @@ export default function Profile() {
                     setUserID(newUser.id);
                 }
 
-                const credentials = await (await fetch(`${window.location.origin}/api/users/${userID}`)).json();
+                const credentials = await (
+                    await fetch(
+                        `${
+                            typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                        }/api/users/${userID}`
+                    )
+                ).json();
                 for (const credential of credentials) {
                     const debt = await (
-                        await fetch(`${window.location.origin}/api/users/${userID}/${credential.id}`)
+                        await fetch(
+                            `${
+                                typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                            }/api/users/${userID}/${credential.id}`
+                        )
                     ).json();
 
                     const credentialAmount = [...debt].reduce((acc: number, item: debts) => acc + item.amount, 0);
@@ -111,13 +131,18 @@ export default function Profile() {
                     <button
                         onClick={async () => {
                             console.log(
-                                await fetch(`${window.location.origin}/api/users?type=delete&id=${userID}`, {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json;charset=utf-8",
-                                    },
-                                    body: JSON.stringify({}),
-                                })
+                                await fetch(
+                                    `${
+                                        typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                    }/api/users?type=delete&id=${userID}`,
+                                    {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json;charset=utf-8",
+                                        },
+                                        body: JSON.stringify({}),
+                                    }
+                                )
                             );
                         }}
                     >

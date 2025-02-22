@@ -30,21 +30,31 @@ export function InputName({
                             setUsername(username);
                             if (type == "creditor") {
                                 debtClass?.replace("name", username);
-                                await fetch(`${window.location.origin}/api/users/${userID}?id=${debtClass?.index}`, {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json;charset=utf-8",
-                                    },
-                                    body: JSON.stringify({ name: username }),
-                                });
+                                await fetch(
+                                    `${
+                                        typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                    }/api/users/${userID}?id=${debtClass?.index}`,
+                                    {
+                                        method: "PUT",
+                                        headers: {
+                                            "Content-Type": "application/json;charset=utf-8",
+                                        },
+                                        body: JSON.stringify({ name: username }),
+                                    }
+                                );
                             } else {
-                                await fetch(`${window.location.origin}/api/users?id=${userID}`, {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json;charset=utf-8",
-                                    },
-                                    body: JSON.stringify({ username }),
-                                });
+                                await fetch(
+                                    `${
+                                        typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                    }/api/users?id=${userID}`,
+                                    {
+                                        method: "PUT",
+                                        headers: {
+                                            "Content-Type": "application/json;charset=utf-8",
+                                        },
+                                        body: JSON.stringify({ username }),
+                                    }
+                                );
                             }
                         }
                         setEdit(false);

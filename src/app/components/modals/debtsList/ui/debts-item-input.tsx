@@ -48,13 +48,18 @@ export function DebtsInputItem({
                             setEdit(false);
                             debtsClass.setDebts((prev) => debtsClass.filter(prev));
 
-                            await fetch(`${window.location.origin}/api/users/1/${debtClass.index}?id=${i}`, {
-                                method: "PUT",
-                                headers: {
-                                    "Content-Type": "application/json;charset=utf-8",
-                                },
-                                body: JSON.stringify(fetchData),
-                            });
+                            await fetch(
+                                `${
+                                    typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                }/api/users/1/${debtClass.index}?id=${i}`,
+                                {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json;charset=utf-8",
+                                    },
+                                    body: JSON.stringify(fetchData),
+                                }
+                            );
                         }
                     }}
                     // styleInput={{
@@ -99,13 +104,18 @@ export function DebtsInputItem({
                             }
                             setEdit(false);
                             debtsClass.setDebts((prev) => debtsClass.filter(prev));
-                            await fetch(`${window.location.origin}/api/users/1/${debtClass.index}?id=${i}`, {
-                                method: "PUT",
-                                headers: {
-                                    "Content-Type": "application/json;charset=utf-8",
-                                },
-                                body: JSON.stringify(fetchData),
-                            });
+                            await fetch(
+                                `${
+                                    typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                }/api/users/1/${debtClass.index}?id=${i}`,
+                                {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json;charset=utf-8",
+                                    },
+                                    body: JSON.stringify(fetchData),
+                                }
+                            );
                         }
                     }}
                 />

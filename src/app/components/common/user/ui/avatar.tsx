@@ -59,23 +59,33 @@ export function Avatar({
                             setImage(res);
                             if (type == "creditor") {
                                 debtClass?.replace("avatar", res);
-                                await fetch(`${window.location.origin}/api/users/1?id=${debtClass?.index}`, {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json;charset=utf-8",
-                                    },
-                                    body: JSON.stringify({
-                                        avatar: res,
-                                    }),
-                                });
+                                await fetch(
+                                    `${
+                                        typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                    }/api/users/1?id=${debtClass?.index}`,
+                                    {
+                                        method: "PUT",
+                                        headers: {
+                                            "Content-Type": "application/json;charset=utf-8",
+                                        },
+                                        body: JSON.stringify({
+                                            avatar: res,
+                                        }),
+                                    }
+                                );
                             } else {
-                                await fetch(`${window.location.origin}/api/users?id=${userID}`, {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json;charset=utf-8",
-                                    },
-                                    body: JSON.stringify({ avatar: res }),
-                                });
+                                await fetch(
+                                    `${
+                                        typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
+                                    }/api/users?id=${userID}`,
+                                    {
+                                        method: "PUT",
+                                        headers: {
+                                            "Content-Type": "application/json;charset=utf-8",
+                                        },
+                                        body: JSON.stringify({ avatar: res }),
+                                    }
+                                );
                             }
                         });
                     }
