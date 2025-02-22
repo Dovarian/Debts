@@ -15,7 +15,7 @@ export default function Home() {
 
         async function fetchData() {
             if (session.status == "authenticated") {
-                console.log(session.data.user);
+                console.log(typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
 
                 const user = await (
                     await fetch(
