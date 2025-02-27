@@ -49,10 +49,10 @@ export function RegistrationForm() {
                 onClick={async (e) => {
                     e.preventDefault();
                     const form = document.querySelector("#reg-form")!.children;
-                    const username = (form[0].children[1].children[0] as HTMLInputElement).value;
-                    const email = (form[1].children[1].children[0] as HTMLInputElement).value;
-                    const password = (form[2].children[1].children[0] as HTMLInputElement).value;
-                    const confirmPassword = (form[3].children[1].children[0] as HTMLInputElement).value;
+                    const username = (form[0].children[1].children[1] as HTMLInputElement).value;
+                    const email = (form[1].children[1].children[1] as HTMLInputElement).value;
+                    const password = (form[2].children[1].children[1] as HTMLInputElement).value;
+                    const confirmPassword = (form[3].children[1].children[1] as HTMLInputElement).value;
 
                     if (username && password && confirmPassword && email) {
                         if (password == confirmPassword) {

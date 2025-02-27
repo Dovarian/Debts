@@ -7,6 +7,7 @@ export function Input({
     required,
     className,
     maxWidth = "auto",
+    placeholder,
     onKeyUp,
     onChange,
     ...props
@@ -19,6 +20,7 @@ export function Input({
     name?: string;
     id?: string;
     defaultValue?: string;
+    maxLength?: number;
     onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }) {
@@ -28,9 +30,10 @@ export function Input({
 
     return (
         <div className="relative overflow-x-hidden inline-block">
-            <span className="opacity-0 fixed -top-96">{value + "0000"}</span>
+            <span className="opacity-0 fixed -top-96">{value == "" ? placeholder + "0000" : value + "0000"}</span>
             <input
                 {...props}
+                placeholder={placeholder}
                 className={clsx(
                     "outline-none bg-slate-50 shadow p-2 transition focus:bg-slate-100 focus:shadow-sm",
                     className
@@ -41,6 +44,10 @@ export function Input({
                 {...requiredProp}
                 value={value}
                 onInput={(e) => {
+                    setValue((e.target as HTMLInputElement).value);
+                    setWidth(((e.target as HTMLInputElement).parentElement!.children[0] as HTMLElement).offsetWidth);
+                }}
+                onInputCapture={(e) => {
                     setValue((e.target as HTMLInputElement).value);
                     setWidth(((e.target as HTMLInputElement).parentElement!.children[0] as HTMLElement).offsetWidth);
                 }}
