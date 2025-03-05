@@ -25,7 +25,7 @@ export function CreateDebtModal({
 
     if (isClient) {
         return createPortal(
-            <dialog className="w-[900px] bg-white shadow-lg border-slate-200 p-4 text-lg" ref={ref}>
+            <dialog className="w-[900px] bg-white shadow-lg border-slate-200 p-6 text-lg" ref={ref}>
                 <div>
                     <Form />
                 </div>

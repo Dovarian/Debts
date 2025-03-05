@@ -27,14 +27,22 @@ export function Form() {
                         required={false}
                         type="number"
                         name="amount"
-                        maxLength={35}
+                        maxLength={10}
                         maxWidth={250}
                     />
                     <Currency className="bg-slate-100 hover:bg-slate-200 transition" />
                 </div>
                 <div className="flex items-center gap-2">
                     <label htmlFor="date">До</label>{" "}
-                    <Input required={false} type="date" id="date" name="date" maxLength={35} maxWidth={250} />
+                    <Input
+                        required={false}
+                        type="date"
+                        id="date"
+                        name="date"
+                        maxLength={35}
+                        maxWidth={10}
+                        adaptive={false}
+                    />
                 </div>
             </div>
         </form>
