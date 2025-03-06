@@ -13,7 +13,7 @@ export function SignInForm() {
     const router = useRouter();
 
     return (
-        <div className="flex flex-col gap-6 text-center">
+        <div className="flex flex-col gap-6 text-center overflow-auto">
             <form action="#" id="signIn-form" className="flex flex-col mt-12 gap-4">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="email" className="text-xl">

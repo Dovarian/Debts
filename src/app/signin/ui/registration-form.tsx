@@ -12,7 +12,7 @@ export function RegistrationForm() {
     const router = useRouter();
 
     return (
-        <form action="#" id="reg-form" className="flex flex-col mt-12 gap-4">
+        <form action="#" id="reg-form" className="flex flex-col mt-12 gap-4 overflow-auto">
             <div className="flex flex-col gap-2">
                 <label htmlFor="username" className="text-xl">
                     Имя пользователя
