@@ -27,11 +27,11 @@ export default function Header({ userID }: { userID: number | null }) {
     }, [userID]);
 
     return (
-        <header className="bg-[--div-bg] py-4 px-8 border-gray-500 shadow flex justify-between items-center mx-[20vw] mt-6">
-            <div className="text-5xl">Долги</div>
+        <header className="bg-[--div-bg] py-4 px-8 border-gray-500 shadow flex justify-between items-center mx-[20vw] mt-6 max-xl:mx-[5vw] max-md:px-2">
+            <div className="text-5xl max-xl:text-4xl">Долги</div>
             {session.status == "authenticated" && (
                 <div className="flex items-center gap-10">
-                    <VertLine className="h-12" />
+                    <VertLine className="h-12 max-md:hidden" />
                     <Link href="/profile">
                         <User
                             src={userData.avatar}
@@ -40,11 +40,11 @@ export default function Header({ userID }: { userID: number | null }) {
                             avatarClassName="cursor-pointer"
                         />
                     </Link>
-                    <VertLine className="h-12" />
+                    <VertLine className="h-12 max-md:hidden" />
                     <Link
                         href="#"
                         className="font-light text-2xl py-2 px-4 border border-gray-500 rounded
-                        hover:bg-red-500 hover:text-slate-100 hover:border-slate-100 transition"
+                        hover:bg-red-500 hover:text-slate-100 hover:border-slate-100 transition max-md:hidden"
                         onClick={() => {
                             signOut({ callbackUrl: "/" });
                         }}

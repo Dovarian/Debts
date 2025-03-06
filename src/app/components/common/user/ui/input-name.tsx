@@ -1,4 +1,3 @@
-import { getAdaptiveSize } from "../../../../../helpers/helpers";
 import { DebtClass } from "../../../../../lib/debt-class";
 import { Input } from "../../input";
 
@@ -60,7 +59,6 @@ export function InputName({
                         setEdit(false);
                     }
                 }}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => getAdaptiveSize(event, 16, placeholder)}
             />
         </span>
     );

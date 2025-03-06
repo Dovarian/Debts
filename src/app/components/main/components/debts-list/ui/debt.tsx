@@ -8,20 +8,22 @@ import defaultAvatar from "../../../../../../../public/images/default-avatar.png
 
 export function Debt({ debtClass, debtsClass }: { debtClass: DebtClass; debtsClass: DebtsClass }) {
     return (
-        <div className="bg-white shadow py-4 px-10 text-2xl flex items-center justify-between group/debt">
-            <User
-                src={!debtClass.debt.avatar ? defaultAvatar.src : debtClass.debt.avatar}
-                userName={debtClass.debt.name}
-                debtClass={debtClass}
-                variability={true}
-            />
-            <VertLine className="h-8" />
-            <div className={clsx("font-medium", debtClass.calcAmount() < 0 ? "text-red-600" : "text-green-600")}>
-                {debtClass.calcAmount()}₽
+        <div className="bg-white shadow py-4 px-10 text-2xl flex items-center gap-[2.5vw] group/debt overflow-auto max-md:flex-col max-md:gap-5 max-md:items-start">
+            <div className="flex items-center w-1/2 gap-[2.5vw] max-md:justify-between max-md:w-full">
+                <User
+                    src={!debtClass.debt.avatar ? defaultAvatar.src : debtClass.debt.avatar}
+                    userName={debtClass.debt.name}
+                    debtClass={debtClass}
+                    variability={true}
+                />
+                <VertLine className="h-8 max-md:hidden" />
+                <div className={clsx("font-medium", debtClass.calcAmount() < 0 ? "text-red-600" : "text-green-600")}>
+                    {debtClass.calcAmount()}₽
+                </div>
             </div>
-            <VertLine className="h-8" />
+            <VertLine className="h-8 max-md:hidden" />
             <div
-                className="border py-2 px-4 cursor-pointer select-none relative"
+                className="border py-2 px-4 cursor-pointer select-none relative max-md:mx-auto"
                 id={`debtsList-btn-${debtClass.index}`}
             >
                 <div onClick={() => debtClass.openDebtsList()}>
@@ -41,7 +43,7 @@ export function Debt({ debtClass, debtsClass }: { debtClass: DebtClass; debtsCla
                 <DebtsListModal debtClass={debtClass} debtsClass={debtsClass} />
             </div>
             <div
-                className="text-4xl font-bold text-red-600 select-none cursor-pointer opacity-50 group-hover/debt:opacity-100 transition"
+                className="text-4xl font-bold text-red-600 select-none cursor-pointer opacity-50 group-hover/debt:opacity-100 transition max-md:mx-auto"
                 onClick={() => {
                     debtClass.delete();
                 }}

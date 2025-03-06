@@ -27,7 +27,7 @@ export function Input({
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }) {
     const requiredProp = required ? { required: true } : {};
-    const [value, setValue] = useState<string | number>("");
+    const [value, setValue] = useState<string>("");
     const ref = useRef<HTMLElement | null>(null);
     const [width, setWidth] = useState<number>(0);
 
@@ -49,7 +49,7 @@ export function Input({
             }
         >
             <span className="opacity-0 fixed -top-96" ref={ref}>
-                {value + "00000"}
+                {value == "" ? placeholder + "00000" : value + "00000"}
             </span>
 
             <input

@@ -5,7 +5,7 @@ import { Slider } from "./ui/slider";
 
 export function Filters({ debtsClass }: { debtsClass: DebtsClass }) {
     return (
-        <section className="flex justify-between text-lg items-center">
+        <section className="flex justify-between text-lg items-center max-md:flex-col max-md:gap-12">
             <div className="flex items-center gap-2">
                 <Slider debtsClass={debtsClass} />
                 <span>Только свои</span>

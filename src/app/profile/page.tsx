@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { User } from "../components/common/user/user";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { UsersClass } from "../../lib/users-class";
 import { debts, users } from "@prisma/client";
 import { VertLine } from "../components/common/vert-line";
@@ -147,6 +147,15 @@ export default function Profile() {
                     >
                         Удалить аккаунт
                     </button>
+                </Link>
+                <Link
+                    href="#"
+                    className="text-xl px-6 py-[10px] bg-slate-100 ml-8 hover:bg-red-500 hover:text-slate-100 transition text-center"
+                    onClick={() => {
+                        signOut({ callbackUrl: "/" });
+                    }}
+                >
+                    Выйти
                 </Link>
             </div>
         </div>

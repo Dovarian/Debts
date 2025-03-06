@@ -27,7 +27,7 @@ export function Main({ userID }: { userID: number | null }) {
     }, [userID]);
 
     return (
-        <main className="mx-[20vw] mt-24">
+        <main className="mx-[20vw] mt-24 max-xl:mx-[5vw]">
             <Filters debtsClass={debtsClass} />
             <DebtsList debtsClass={debtsClass} setDebts={setDebts} debts={debts} />
         </main>
