@@ -6,7 +6,11 @@ import { Input } from "../../../common/input";
 
 export function Form() {
     return (
-        <form className="flex items-center justify-around" name="debt" id="debtForm">
+        <form
+            className="flex items-center justify-around max-md:flex max-md:flex-col max-md:gap-8"
+            name="debt"
+            id="debtForm"
+        >
             <ChooseAvatar name="avatar" avatar={defaultAvatar.src} />
             <div className="flex flex-col gap-4">
                 <Input placeholder="Имя" required={true} type="text" name="userName" maxLength={35} maxWidth={250} />
@@ -19,7 +23,7 @@ export function Form() {
                     maxWidth={250}
                 />
             </div>
-            <VertLine className="h-24" />
+            <VertLine className="h-24 max-md:hidden" />
             <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                     <Input

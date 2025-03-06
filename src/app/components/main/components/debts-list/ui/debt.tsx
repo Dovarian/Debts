@@ -8,7 +8,7 @@ import defaultAvatar from "../../../../../../../public/images/default-avatar.png
 
 export function Debt({ debtClass, debtsClass }: { debtClass: DebtClass; debtsClass: DebtsClass }) {
     return (
-        <div className="bg-white shadow py-4 px-10 text-2xl flex items-center gap-[2.5vw] group/debt overflow-auto max-md:flex-col max-md:gap-5 max-md:items-start">
+        <div className="bg-white shadow py-4 px-10 text-2xl flex items-center gap-[2.5vw] group/debt overflow-auto max-md:flex-col max-md:gap-5 max-md:items-start max-md:text-xl">
             <div className="flex items-center w-1/2 gap-[2.5vw] max-md:justify-between max-md:w-full">
                 <User
                     src={!debtClass.debt.avatar ? defaultAvatar.src : debtClass.debt.avatar}

@@ -25,13 +25,13 @@ export function CreateDebtModal({
 
     if (isClient) {
         return createPortal(
-            <dialog className="w-[900px] bg-white shadow-lg border-slate-200 p-6 text-lg" ref={ref}>
+            <dialog className="w-[900px] bg-white shadow-lg border-slate-200 p-6 text-lg max-md:p-2" ref={ref}>
                 <div>
                     <Form />
                 </div>
-                <div className="flex justify-center mt-6 gap-2 pl-72">
+                <div className="flex justify-center mt-6 gap-2 pl-72 max-md:pl-0 max-md:mx-auto max-md:flex-col">
                     <button
-                        className="bg-lime-400 shadow px-36 py-2 transition hover:shadow-sm hover:bg-[#b4e95f]"
+                        className="bg-lime-400 shadow px-36 py-2 transition hover:shadow-sm hover:bg-[#b4e95f] max-md:mx-auto max-md:px-12"
                         onClick={() => {
                             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                             // @ts-ignore

@@ -23,7 +23,7 @@ export function User({
     className?: string;
 }) {
     return (
-        <div className={clsx("text-2xl flex items-center gap-3", className)}>
+        <div className={clsx("text-2xl flex items-center gap-3 max-md:text-xl", className)}>
             <div className={clsx("group relative w-10 h-10  cursor-pointer")}>
                 <Avatar
                     src={src}
