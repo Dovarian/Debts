@@ -90,8 +90,8 @@ export default function Profile() {
     }, [session]);
 
     return (
-        <div className="bg-white mx-auto w-[50vw] h-80 mt-64 p-8 flex shadow">
-            <div className="flex flex-col gap-4 w-1/2 pr-4">
+        <div className="bg-white mx-auto w-[50vw] mt-64 p-8 flex shadow max-xl:w-[90vw] max-md:flex-col max-md:gap-8 max-md:items-center">
+            <div className="flex flex-col gap-4 w-1/2 pr-4 max-md:w-auto">
                 <span className="border-b border-b-slate-600 py-2">
                     <User
                         src={user?.avatar || ""}
@@ -115,8 +115,8 @@ export default function Profile() {
                     Вам: <span className="text-green-600 font-medium">{debtsToMe}</span>
                 </span>
             </div>
-            <VertLine className="h-full" />
-            <div className="w-1/2 flex flex-col gap-6">
+            <VertLine className="h-64 max-md:hidden" />
+            <div className="w-1/2 flex flex-col gap-6 max-md:w-auto">
                 <Link
                     href="/"
                     className="text-xl px-6 py-[10px] bg-slate-100 ml-8 border border-white hover:bg-slate-50 hover:border-slate-200 hover:shadow-sm transition text-center"
