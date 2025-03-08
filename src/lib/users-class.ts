@@ -19,7 +19,7 @@ export class UsersClass {
                 },
                 body: JSON.stringify({
                     username,
-                    email,
+                    email: email ? email : null,
                     password: password ? password : null,
                     avatar: avatar ? avatar : "",
                 }),

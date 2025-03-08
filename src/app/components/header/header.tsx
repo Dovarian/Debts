@@ -13,6 +13,14 @@ export default function Header({ userID }: { userID: number | null }) {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log(
+                await (
+                    await fetch(
+                        `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/api/users`
+                    )
+                ).json()
+            );
+
             const data = (
                 await (
                     await fetch(
