@@ -15,8 +15,6 @@ export default function Home() {
 
         async function fetchData() {
             if (session.status == "authenticated") {
-                console.log(typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
-
                 const user = await (
                     await fetch(
                         `${
@@ -24,20 +22,19 @@ export default function Home() {
                         }/api/users?email=${session.data.user?.email}`
                     )
                 ).json();
+                console.log(!!(await user)?.email || (await user)?.email == "");
 
-                if (!!(await user)?.email) {
+                if (!!(await user)?.email || (await user)?.email == "") {
                     setUserID(await user.id);
                 } else {
                     setUserID(
-                        (
-                            await (
-                                await usersClass.addUser({
-                                    username: session.data.user?.name as string,
-                                    email: session.data.user?.email as string,
-                                    avatar: session.data.user?.image as string,
-                                })
-                            ).json()
-                        ).id
+                        await (
+                            await usersClass.addUser({
+                                username: session.data.user?.name as string,
+                                email: session.data.user?.email as string,
+                                avatar: session.data.user?.image as string,
+                            })
+                        ).json().id
                     );
                 }
             }
