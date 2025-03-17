@@ -28,13 +28,15 @@ export default function Home() {
                     setUserID(await user.id);
                 } else {
                     setUserID(
-                        await (
-                            await usersClass.addUser({
-                                username: session.data.user?.name as string,
-                                email: session.data.user?.email as string,
-                                avatar: session.data.user?.image as string,
-                            })
-                        ).json().id
+                        (
+                            await (
+                                await usersClass.addUser({
+                                    username: session.data.user?.name as string,
+                                    email: session.data.user?.email as string,
+                                    avatar: session.data.user?.image as string,
+                                })
+                            ).json()
+                        ).id
                     );
                 }
             }
