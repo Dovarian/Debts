@@ -33,6 +33,11 @@ export const usersRepository = {
 			$or: [{ login: loginOrEmail }, { email: loginOrEmail }],
 		})
 	},
+	async findUserByConfirmationCode(code: string) {
+		return await usersCollection.findOne({
+			'emailConfirmation.confirmationCode': code,
+		})
+	},
 	async addUser(user: UserDBType) {
 		return (await usersCollection.insertOne(user)).insertedId
 	},
@@ -64,5 +69,15 @@ export const usersRepository = {
 	async deleteUser(id: string) {
 		return !!(await usersCollection.deleteOne({ _id: new ObjectId(id) }))
 			.deletedCount
+	},
+	async updateConfirmation(id: string) {
+		return (
+			(
+				await usersCollection.updateOne(
+					{ _id: new ObjectId(id) },
+					{ $set: { 'emailConfirmation.isConfirmed': true } }
+				)
+			).matchedCount === 1
+		)
 	},
 }
