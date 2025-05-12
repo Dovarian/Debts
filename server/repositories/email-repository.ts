@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { settings } from '../settings'
 
 export const emailRepository = {
 	async sendEmail(email: string, subject: string, message: string) {
@@ -7,8 +8,8 @@ export const emailRepository = {
 			port: 465,
 			secure: true,
 			auth: {
-				user: 'simplerucoder@mail.ru',
-				pass: 'hZAGa7QpmHpKCvFVThna',
+				user: settings.EMAIL_USER,
+				pass: settings.EMAIL_PASS,
 			},
 		})
 
