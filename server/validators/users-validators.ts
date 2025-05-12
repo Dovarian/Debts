@@ -2,7 +2,7 @@ import { body, param, query } from 'express-validator'
 
 export const usersValidators = {
 	idValidation(validator: typeof body | typeof param | typeof query) {
-		return validator('userID').trim().isLength({ min: 24, max: 24 }).isString()
+		return validator('id').trim().isLength({ min: 24, max: 24 }).isString()
 	},
 	pageValidator(validator: typeof body | typeof param | typeof query) {
 		return validator('page')

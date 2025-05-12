@@ -19,6 +19,7 @@ const mapUserDBTypeToUserViewType = (
 		return {
 			id: user._id.toHexString(),
 			avatarUrl: user.userData.avatarUrl,
+			login: user.userData.login,
 			email: user.userData.email,
 			nickname: user.userData.nickname,
 			createdAt: user.userData.createdAt,
@@ -29,10 +30,15 @@ const mapUserDBTypeToUserViewType = (
 }
 
 export const usersService = {
-	async findUsers(page: number, pageSize: number, nickname?: string) {
-		return (await usersRepository.findUsers(page, pageSize, nickname)).map(
-			mapUserDBTypeToUserViewType
-		)
+	async findUsers(
+		page: number,
+		pageSize: number,
+		nickname?: string,
+		login?: string
+	) {
+		return (
+			await usersRepository.findUsers(page, pageSize, nickname, login)
+		).map(mapUserDBTypeToUserViewType)
 	},
 	async findUser(id: string) {
 		const user = mapUserDBTypeToUserViewType(await usersRepository.findUser(id))
@@ -77,7 +83,7 @@ export const usersService = {
 		login?: string,
 		email?: string,
 		nickname?: string,
-		avatar?: string,
+		avatarUrl?: string,
 		password?: string
 	) {
 		let passwordHash = ''
@@ -88,7 +94,7 @@ export const usersService = {
 			login,
 			email,
 			nickname,
-			avatar,
+			avatarUrl,
 			passwordHash
 		)
 

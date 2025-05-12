@@ -20,6 +20,7 @@ export const getUsersRouter = () => {
 			usersValidators.pageValidator(query),
 			usersValidators.pageSizeValidator(query),
 			usersValidators.nicknameValidation(query).optional(),
+			usersValidators.loginValidation(query).optional(),
 		],
 		inputValidationMiddleware,
 		async (
@@ -27,6 +28,7 @@ export const getUsersRouter = () => {
 				page: string
 				pageSize: string
 				nickname?: string
+				login?: string
 			}>,
 			res: Response<(UserViewType | null)[]>
 		) => {
@@ -36,7 +38,8 @@ export const getUsersRouter = () => {
 					await usersService.findUsers(
 						Number(req.query.page),
 						Number(req.query.pageSize),
-						req.query.nickname
+						req.query.nickname,
+						req.query.login
 					)
 				)
 		}
@@ -128,11 +131,11 @@ export const getUsersRouter = () => {
 			req: RequestWithParamsAndBody<
 				{ id: string },
 				{
-					login: string
-					email: string
-					nickname: string
-					avatar: string
-					password: string
+					login?: string
+					email?: string
+					nickname?: string
+					avatarUrl?: string
+					password?: string
 				}
 			>,
 			res: Response,
@@ -144,7 +147,7 @@ export const getUsersRouter = () => {
 					req.body.login,
 					req.body.email,
 					req.body.nickname,
-					req.body.avatar,
+					req.body.avatarUrl,
 					req.body.password
 				)
 

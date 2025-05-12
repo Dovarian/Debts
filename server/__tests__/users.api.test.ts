@@ -1,54 +1,45 @@
 import { app } from '../app'
 import { client, usersCollection } from '../repositories/db'
 import request from 'supertest'
+import { UserViewType } from '../types/users-types'
 
-const createTestUsers = async () => {
-	const userData1 = {
-		login: 'Andrey',
-		email: 'email1@mail.ru',
-		nickname: 'Great Conqueror',
-		password: '123456Xx',
+const createTestUsers = async (count: 1 | 2 | 3) => {
+	const usersData = [
+		{
+			login: 'Andrey',
+			email: 'email1@mail.ru',
+			nickname: 'Great Conqueror',
+			password: '123456Xx',
+		},
+		{
+			login: 'Kirill',
+			email: 'email2@mail.ru',
+			nickname: 'Great Sailor',
+			password: '234567Xx',
+		},
+		{
+			login: 'Dima',
+			email: 'email3@mail.ru',
+			nickname: 'Great Warrior',
+			password: '345678Xx',
+		},
+	]
+
+	const createdUsers: UserViewType[] = []
+
+	for (let i = 0; i < count; i++) {
+		createdUsers[i] = (
+			await request(app).post('/api/users').send(usersData[i]).expect(201)
+		).body
+
+		expect(createdUsers[i]).toMatchObject({
+			id: expect.any(String),
+			email: usersData[i].email,
+			nickname: usersData[i].nickname,
+		})
 	}
-	const createdUser1 = (
-		await request(app).post('/api/users').send(userData1).expect(201)
-	).body
-	expect(createdUser1).toMatchObject({
-		id: expect.any(String),
-		email: userData1.email,
-		nickname: userData1.nickname,
-	})
 
-	const userData2 = {
-		login: 'Kirill',
-		email: 'email2@mail.ru',
-		nickname: 'Great Sailor',
-		password: '234567Xx',
-	}
-	const createdUser2 = (
-		await request(app).post('/api/users').send(userData2).expect(201)
-	).body
-	expect(createdUser2).toMatchObject({
-		id: expect.any(String),
-		email: userData2.email,
-		nickname: userData2.nickname,
-	})
-
-	const userData3 = {
-		login: 'Dima',
-		email: 'email3@mail.ru',
-		nickname: 'Great Warrior',
-		password: '345678Xx',
-	}
-	const createdUser3 = (
-		await request(app).post('/api/users').send(userData3).expect(201)
-	).body
-	expect(createdUser3).toMatchObject({
-		id: expect.any(String),
-		email: userData3.email,
-		nickname: userData3.nickname,
-	})
-
-	return { createdUser1, createdUser2, createdUser3 }
+	return createdUsers
 }
 
 describe('/api/users', () => {
@@ -66,42 +57,56 @@ describe('/api/users', () => {
 		})
 
 		it('return filtered array', async () => {
-			const createdUsers = await createTestUsers()
+			const createdUsers = await createTestUsers(3)
 			await request(app)
 				.get(
-					`/api/users?nickname=${createdUsers.createdUser2?.nickname}&page=1&pageSize=4`
+					`/api/users?nickname=${createdUsers[1]?.nickname}&page=1&pageSize=4`
 				)
-				.expect(200, [createdUsers.createdUser2])
+				.expect(200, [createdUsers[1]])
 		})
 
 		it('return two users with pageSize equal 2 and page equal 1', async () => {
-			const createdUsers = await createTestUsers()
+			const createdUsers = await createTestUsers(3)
 
 			await request(app)
 				.get(`/api/users?page=1&pageSize=2`)
-				.expect([createdUsers.createdUser1, createdUsers.createdUser2])
+				.expect([createdUsers[0], createdUsers[1]])
 		})
 
 		it('return one users with pageSize equal 2 and page equal 2', async () => {
-			const createdUsers = await createTestUsers()
+			const createdUsers = await createTestUsers(3)
 
 			await request(app)
 				.get(`/api/users?page=2&pageSize=2`)
-				.expect([createdUsers.createdUser3])
+				.expect([createdUsers[2]])
 		})
 	})
 
-	describe('post users', () => {
+	describe('get user', () => {
+		it('return 404 for note existing user', async () => {
+			await request(app).get('/api/users/000000000000000000000000').expect(404)
+		})
+
+		it('return 200 and certain user', async () => {
+			const createdUsers = await createTestUsers(2)
+
+			await request(app)
+				.get(`/api/users/${createdUsers[0]!.id}`)
+				.expect(200, createdUsers[0])
+
+			await request(app)
+				.get(`/api/users/${createdUsers[1]!.id}`)
+				.expect(200, createdUsers[1])
+		})
+	})
+
+	describe('post user', () => {
 		it('create users with correct data', async () => {
-			const createdUsers = await createTestUsers()
+			const createdUsers = await createTestUsers(3)
 
 			await request(app)
 				.get('/api/users?page=1&pageSize=4')
-				.expect(200, [
-					createdUsers.createdUser1,
-					createdUsers.createdUser2,
-					createdUsers.createdUser3,
-				])
+				.expect(200, [createdUsers[0], createdUsers[1], createdUsers[2]])
 		})
 
 		it('don`t create user with empty data', async () => {
@@ -130,6 +135,80 @@ describe('/api/users', () => {
 			}
 			await request(app).post('/api/users').send(userData).expect(400)
 			await request(app).get('/api/users?page=1&pageSize=4').expect(200, [])
+		})
+	})
+
+	describe('update user', () => {
+		it('don`t update user with incorrect data', async () => {
+			const createdUsers = await createTestUsers(1)
+			const update = { nickname: '' }
+
+			await request(app)
+				.patch(`/api/users/${createdUsers[0]!.id}`)
+				.send(update)
+				.expect(400)
+
+			await request(app)
+				.get(`/api/users/${createdUsers[0]!.id}`)
+				.expect(200, createdUsers[0])
+		})
+
+		it('don`t update user that not exist', async () => {
+			const userData = { nickname: 'Negr' }
+
+			await request(app)
+				.put('/api/users/000000000000000000000000')
+				.send(userData)
+				.expect(404)
+		})
+
+		it('update user with correct data', async () => {
+			const createdUsers = await createTestUsers(2)
+
+			const update = {
+				nickname: 'Negr',
+				login: 'GoodBoy',
+				email: 'supermail@mail.ru',
+				avatarUrl: 'hbfdbfhjg',
+			}
+
+			await request(app)
+				.patch(`/api/users/${createdUsers[0]!.id}`)
+				.send(update)
+				.expect(204)
+
+			createdUsers[0].nickname = update.nickname
+			createdUsers[0].login = update.login
+			createdUsers[0].email = update.email
+			createdUsers[0].avatarUrl = update.avatarUrl
+
+			await request(app)
+				.get(`/api/users/${createdUsers[0]!.id}`)
+				.expect(200, createdUsers[0])
+
+			await request(app)
+				.get(`/api/users/${createdUsers[1]!.id}`)
+				.expect(200, createdUsers[1])
+		})
+	})
+
+	describe('delete user', () => {
+		it('don`t delete user that not exist', async () => {
+			await request(app)
+				.delete('/api/users/000000000000000000000000')
+				.expect(404)
+		})
+
+		it('delete both users', async () => {
+			const createdUsers = await createTestUsers(3)
+
+			await request(app).delete(`/api/users/${createdUsers[0].id}`).expect(204)
+			await request(app).get(`/api/users/${createdUsers[0].id}`).expect(404)
+
+			await request(app).delete(`/api/users/${createdUsers[2].id}`).expect(204)
+			await request(app).get(`/api/users/${createdUsers[2].id}`).expect(404)
+
+			await request(app).get("/api/users?page=1&pageSize=4").expect([createdUsers[1]])
 		})
 	})
 })

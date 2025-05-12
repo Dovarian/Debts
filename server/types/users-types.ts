@@ -25,6 +25,7 @@ export type UserViewType = {
 	id: string
 	email: string
 	nickname: string
+	login: string
 	avatarUrl: string
 	createdAt: Date
 }

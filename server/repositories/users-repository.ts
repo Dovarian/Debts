@@ -3,11 +3,18 @@ import { usersCollection } from './db'
 import { UserDBType } from '../types/users-types'
 
 export const usersRepository = {
-	async findUsers(page: number, pageSize: number, nickname?: string) {
+	async findUsers(
+		page: number,
+		pageSize: number,
+		nickname?: string,
+		login?: string
+	) {
 		const filter: any = []
 
 		if (nickname) {
 			filter.push({ 'userData.nickname': { $regex: nickname } })
+		} else if (login) {
+			filter.push({ 'userData.login': { $regex: login } })
 		} else {
 			filter.push({})
 		}
@@ -34,7 +41,7 @@ export const usersRepository = {
 		login?: string,
 		email?: string,
 		nickname?: string,
-		avatar?: string,
+		avatarUrl?: string,
 		passwordHash?: string
 	) {
 		const updates: any = {}
@@ -42,7 +49,7 @@ export const usersRepository = {
 		!!login ? (updates['userData.login'] = login) : ''
 		!!email ? (updates['userData.email'] = email) : ''
 		!!nickname ? (updates['userData.nickname'] = nickname) : ''
-		!!avatar ? (updates['userData.avatar'] = avatar) : ''
+		!!avatarUrl ? (updates['userData.avatarUrl'] = avatarUrl) : ''
 		!!passwordHash ? (updates['userData.passwordHash'] = passwordHash) : ''
 
 		return (
