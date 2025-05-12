@@ -10,6 +10,13 @@ import {
 } from '../types/users-types'
 import { usersService } from '../services/users-service'
 import { inputValidationMiddleware } from '../middlewares/input-validation-middleware'
+import {
+	CreateUserApiType,
+	QueryLoginOrEmailUserApiType,
+	QueryUserApiType,
+	UpdateUserApiType,
+	UriParamUserApiType,
+} from '../api-types/user-api-types'
 
 export const getUsersRouter = () => {
 	const router = Router()
@@ -24,20 +31,15 @@ export const getUsersRouter = () => {
 		],
 		inputValidationMiddleware,
 		async (
-			req: RequestWithQuery<{
-				page: string
-				pageSize: string
-				nickname?: string
-				login?: string
-			}>,
+			req: RequestWithQuery<QueryUserApiType>,
 			res: Response<(UserViewType | null)[]>
 		) => {
 			res
 				.status(200)
 				.json(
 					await usersService.findUsers(
-						Number(req.query.page),
-						Number(req.query.pageSize),
+						req.query.page,
+						req.query.pageSize,
 						req.query.nickname,
 						req.query.login
 					)
@@ -50,7 +52,7 @@ export const getUsersRouter = () => {
 		usersValidators.idValidation(param),
 		inputValidationMiddleware,
 		async (
-			req: RequestWithParams<{ id: string }>,
+			req: RequestWithParams<UriParamUserApiType>,
 			res: Response<UserViewType>,
 			next: NextFunction
 		) => {
@@ -67,7 +69,7 @@ export const getUsersRouter = () => {
 		usersValidators.loginOrEmailValidation(query),
 		inputValidationMiddleware,
 		async (
-			req: RequestWithQuery<{ loginOrEmail: string }>,
+			req: RequestWithQuery<QueryLoginOrEmailUserApiType>,
 			res: Response<UserViewType>,
 			next: NextFunction
 		) => {
@@ -93,12 +95,7 @@ export const getUsersRouter = () => {
 		],
 		inputValidationMiddleware,
 		async (
-			req: RequestWithBody<{
-				email: string
-				login: string
-				nickname: string
-				password: string
-			}>,
+			req: RequestWithBody<CreateUserApiType>,
 			res: Response<UserViewType>
 		) => {
 			const id = await usersService.addUser(
@@ -128,16 +125,7 @@ export const getUsersRouter = () => {
 		],
 		inputValidationMiddleware,
 		async (
-			req: RequestWithParamsAndBody<
-				{ id: string },
-				{
-					login?: string
-					email?: string
-					nickname?: string
-					avatarUrl?: string
-					password?: string
-				}
-			>,
+			req: RequestWithParamsAndBody<UriParamUserApiType, UpdateUserApiType>,
 			res: Response,
 			next: NextFunction
 		) => {
@@ -163,7 +151,7 @@ export const getUsersRouter = () => {
 		usersValidators.idValidation(param),
 		inputValidationMiddleware,
 		async (
-			req: RequestWithParams<{ id: string }>,
+			req: RequestWithParams<UriParamUserApiType>,
 			res: Response<UserViewType>,
 			next: NextFunction
 		) => {

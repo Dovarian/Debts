@@ -2,9 +2,13 @@ import { app } from '../app'
 import { client, usersCollection } from '../repositories/db'
 import request from 'supertest'
 import { UserViewType } from '../types/users-types'
+import {
+	CreateUserApiType,
+	UpdateUserApiType,
+} from '../api-types/user-api-types'
 
 const createTestUsers = async (count: 1 | 2 | 3) => {
-	const usersData = [
+	const usersData: CreateUserApiType[] = [
 		{
 			login: 'Andrey',
 			email: 'email1@mail.ru',
@@ -57,7 +61,7 @@ describe('/api/users', () => {
 		})
 
 		it('return filtered array', async () => {
-			const createdUsers = await createTestUsers(3)
+			const createdUsers: UserViewType[] = await createTestUsers(3)
 			await request(app)
 				.get(
 					`/api/users?nickname=${createdUsers[1]?.nickname}&page=1&pageSize=4`
@@ -66,7 +70,7 @@ describe('/api/users', () => {
 		})
 
 		it('return two users with pageSize equal 2 and page equal 1', async () => {
-			const createdUsers = await createTestUsers(3)
+			const createdUsers: UserViewType[] = await createTestUsers(3)
 
 			await request(app)
 				.get(`/api/users?page=1&pageSize=2`)
@@ -74,7 +78,7 @@ describe('/api/users', () => {
 		})
 
 		it('return one users with pageSize equal 2 and page equal 2', async () => {
-			const createdUsers = await createTestUsers(3)
+			const createdUsers: UserViewType[] = await createTestUsers(3)
 
 			await request(app)
 				.get(`/api/users?page=2&pageSize=2`)
@@ -88,7 +92,7 @@ describe('/api/users', () => {
 		})
 
 		it('return 200 and certain user', async () => {
-			const createdUsers = await createTestUsers(2)
+			const createdUsers: UserViewType[] = await createTestUsers(2)
 
 			await request(app)
 				.get(`/api/users/${createdUsers[0]!.id}`)
@@ -102,7 +106,7 @@ describe('/api/users', () => {
 
 	describe('post user', () => {
 		it('create users with correct data', async () => {
-			const createdUsers = await createTestUsers(3)
+			const createdUsers: UserViewType[] = await createTestUsers(3)
 
 			await request(app)
 				.get('/api/users?page=1&pageSize=4')
@@ -110,13 +114,18 @@ describe('/api/users', () => {
 		})
 
 		it('don`t create user with empty data', async () => {
-			const userData = { login: '', email: '', password: '', nickname: '' }
+			const userData: CreateUserApiType = {
+				login: '',
+				email: '',
+				password: '',
+				nickname: '',
+			}
 			await request(app).post('/api/users').send(userData).expect(400)
 			await request(app).get('/api/users?page=1&pageSize=4').expect(200, [])
 		})
 
 		it('don`t create user with invalid email', async () => {
-			const userData = {
+			const userData: CreateUserApiType = {
 				login: 'negr',
 				email: 'invalidEmail',
 				password: '123456Xx',
@@ -127,7 +136,7 @@ describe('/api/users', () => {
 		})
 
 		it('don`t create user with invalid password', async () => {
-			const userData = {
+			const userData: CreateUserApiType = {
 				login: 'negr',
 				email: 'validEmail@mail.ru',
 				password: '1234',
@@ -140,8 +149,8 @@ describe('/api/users', () => {
 
 	describe('update user', () => {
 		it('don`t update user with incorrect data', async () => {
-			const createdUsers = await createTestUsers(1)
-			const update = { nickname: '' }
+			const createdUsers: UserViewType[] = await createTestUsers(1)
+			const update: UpdateUserApiType = { nickname: '' }
 
 			await request(app)
 				.patch(`/api/users/${createdUsers[0]!.id}`)
@@ -154,7 +163,7 @@ describe('/api/users', () => {
 		})
 
 		it('don`t update user that not exist', async () => {
-			const userData = { nickname: 'Negr' }
+			const userData: UpdateUserApiType = { nickname: 'Negr' }
 
 			await request(app)
 				.put('/api/users/000000000000000000000000')
@@ -163,9 +172,9 @@ describe('/api/users', () => {
 		})
 
 		it('update user with correct data', async () => {
-			const createdUsers = await createTestUsers(2)
+			const createdUsers: UserViewType[] = await createTestUsers(2)
 
-			const update = {
+			const update: UpdateUserApiType = {
 				nickname: 'Negr',
 				login: 'GoodBoy',
 				email: 'supermail@mail.ru',
@@ -177,10 +186,10 @@ describe('/api/users', () => {
 				.send(update)
 				.expect(204)
 
-			createdUsers[0].nickname = update.nickname
-			createdUsers[0].login = update.login
-			createdUsers[0].email = update.email
-			createdUsers[0].avatarUrl = update.avatarUrl
+			createdUsers[0].nickname = update.nickname!
+			createdUsers[0].login = update.login!
+			createdUsers[0].email = update.email!
+			createdUsers[0].avatarUrl = update.avatarUrl!
 
 			await request(app)
 				.get(`/api/users/${createdUsers[0]!.id}`)
@@ -200,7 +209,7 @@ describe('/api/users', () => {
 		})
 
 		it('delete both users', async () => {
-			const createdUsers = await createTestUsers(3)
+			const createdUsers: UserViewType[] = await createTestUsers(3)
 
 			await request(app).delete(`/api/users/${createdUsers[0].id}`).expect(204)
 			await request(app).get(`/api/users/${createdUsers[0].id}`).expect(404)
@@ -208,7 +217,9 @@ describe('/api/users', () => {
 			await request(app).delete(`/api/users/${createdUsers[2].id}`).expect(204)
 			await request(app).get(`/api/users/${createdUsers[2].id}`).expect(404)
 
-			await request(app).get("/api/users?page=1&pageSize=4").expect([createdUsers[1]])
+			await request(app)
+				.get('/api/users?page=1&pageSize=4')
+				.expect([createdUsers[1]])
 		})
 	})
 })

@@ -31,13 +31,13 @@ const mapUserDBTypeToUserViewType = (
 
 export const usersService = {
 	async findUsers(
-		page: number,
-		pageSize: number,
+		page: string,
+		pageSize: string,
 		nickname?: string,
 		login?: string
 	) {
 		return (
-			await usersRepository.findUsers(page, pageSize, nickname, login)
+			await usersRepository.findUsers(+page, +pageSize, nickname, login)
 		).map(mapUserDBTypeToUserViewType)
 	},
 	async findUser(id: string) {
