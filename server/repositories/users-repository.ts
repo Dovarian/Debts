@@ -30,7 +30,10 @@ export const usersRepository = {
 	},
 	async findUserByLoginOrEmail(loginOrEmail: string) {
 		return await usersCollection.findOne({
-			$or: [{ login: loginOrEmail }, { email: loginOrEmail }],
+			$or: [
+				{ 'userData.login': loginOrEmail },
+				{ 'userData.email': loginOrEmail },
+			],
 		})
 	},
 	async findUserByConfirmationCode(code: string) {

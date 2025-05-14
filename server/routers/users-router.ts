@@ -6,8 +6,7 @@ import {
 	RequestWithParams,
 	RequestWithParamsAndBody,
 	RequestWithQuery,
-	UserViewType,
-} from '../types/users-types'
+} from '../types/request-types'
 import { usersService } from '../services/users-service'
 import { inputValidationMiddleware } from '../middlewares/input-validation-middleware'
 import {
@@ -17,6 +16,7 @@ import {
 	UpdateUserApiType,
 	UriParamUserApiType,
 } from '../api-types/user-api-types'
+import { UserViewType } from '../types/users-types'
 
 export const getUsersRouter = () => {
 	const router = Router()

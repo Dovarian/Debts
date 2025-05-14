@@ -4,4 +4,5 @@ export const settings = {
 	DB_NAME: process.env.dbName || 'debts',
 	EMAIL_USER: process.env.emailUser,
 	EMAIL_PASS: process.env.emailPass,
+	JWT_SECRET: process.env.jwtSecret || '123',
 }

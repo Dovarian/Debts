@@ -1,5 +1,5 @@
 import { NextFunction, Response, Router } from 'express'
-import { RequestWithParams } from '../types/users-types'
+import { RequestWithParams } from '../types/request-types'
 import { CreateEmailApiType } from '../api-types/email-api-types'
 import { emailValidators } from '../validators/email-validations'
 import { param } from 'express-validator'
