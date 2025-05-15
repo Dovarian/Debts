@@ -41,11 +41,6 @@ export const usersRepository = {
 			'emailConfirmation.confirmationCode': code,
 		})
 	},
-	async findUserByConfirmationCode(code: string) {
-		return await usersCollection.findOne({
-			'emailConfirmation.confirmationCode': code,
-		})
-	},
 	async addUser(user: UserDBType) {
 		return (await usersCollection.insertOne(user)).insertedId
 	},

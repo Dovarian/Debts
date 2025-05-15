@@ -10,7 +10,7 @@ export const getEmailRouter = () => {
 	const router = Router()
 
 	router.post(
-		'/passwordRecovery/:id',
+		'/password-recovery/:id',
 		emailValidators.idValidation(param),
 		inputValidationMiddleware,
 		async (
@@ -29,7 +29,7 @@ export const getEmailRouter = () => {
 	)
 
 	router.post(
-		'/accountConfirmation/:id',
+		'/account-confirmation/:id',
 		emailValidators.idValidation(param),
 		inputValidationMiddleware,
 		async (

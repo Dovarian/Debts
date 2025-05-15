@@ -22,4 +22,11 @@ export const authValidators = {
 			.matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, 'i')
 			.escape()
 	},
+	tokenValidation(validator: typeof body | typeof param | typeof query) {
+		return validator('token')
+			.trim()
+			.isLength({ min: 1, max: 300 })
+			.isString()
+			.escape()
+	},
 }

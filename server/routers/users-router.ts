@@ -130,14 +130,13 @@ export const getUsersRouter = () => {
 			next: NextFunction
 		) => {
 			try {
-				await usersService.patchUser(
-					req.params.id,
-					req.body.login,
-					req.body.email,
-					req.body.nickname,
-					req.body.avatarUrl,
-					req.body.password
-				)
+				await usersService.patchUser(req.params.id, {
+					login: req.body.login,
+					email: req.body.email,
+					nickname: req.body.nickname,
+					avatarUrl: req.body.avatarUrl,
+					password: req.body.password,
+				})
 
 				res.sendStatus(204)
 			} catch (err) {

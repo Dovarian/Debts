@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { settings } from '../settings'
 import { v4 as uuidv4 } from 'uuid'
 import { jwtRepository } from '../repositories/jwt-repository'
-import { RefreshTokenIncorrectError } from '../errors/refresh-token-incorrect-error'
+import { TokenIncorrectError } from '../errors/token-incorrect-error'
 
 export const jwtService = {
 	async createAccessToken(id: string) {
@@ -17,7 +17,7 @@ export const jwtService = {
 		const payloadData = { userId: id, jti: uuidv4() }
 
 		const token = jwt.sign(payloadData, settings.JWT_SECRET, {
-			expiresIn: '3s',
+			expiresIn: '30d',
 		})
 
 		const payload = await this.getPayloadByToken(token)
@@ -28,13 +28,21 @@ export const jwtService = {
 		return token
 	},
 
+	async createPasswordRecoveryToken(id: string) {
+		const token = jwt.sign({ userId: id, jti: uuidv4() }, settings.JWT_SECRET, {
+			expiresIn: '1h',
+		})
+
+		return token
+	},
+
 	async getPayloadByToken(token: string) {
 		try {
 			const payload = jwt.verify(token, settings.JWT_SECRET)
 
 			return payload as any
 		} catch (err) {
-			throw new RefreshTokenIncorrectError(token)
+			throw new TokenIncorrectError(token)
 		}
 	},
 }

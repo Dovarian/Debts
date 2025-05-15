@@ -5,7 +5,7 @@ import { CodeExpiredError } from '../errors/code-expired'
 import { UserNotConfirmed } from '../errors/user-not-confirmed'
 import { LoginOrPasswordIncorrect } from '../errors/login-or-password-incorrect'
 import { RefreshTokenNotFoundError } from '../errors/refresh-token-not-found-error'
-import { RefreshTokenIncorrectError } from '../errors/refresh-token-incorrect-error'
+import { TokenIncorrectError } from '../errors/token-incorrect-error'
 
 export const errorHandlerMiddleware = (
 	err: UserNotFoundError,
@@ -37,7 +37,7 @@ export const errorHandlerMiddleware = (
 		res.status(401).json({ message: err.message })
 	}
 
-	if (err instanceof RefreshTokenIncorrectError) {
+	if (err instanceof TokenIncorrectError) {
 		res.status(401).json({ message: err.message })
 	}
 

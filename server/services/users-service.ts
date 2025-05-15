@@ -80,11 +80,19 @@ export const usersService = {
 	},
 	async patchUser(
 		id: string,
-		login?: string,
-		email?: string,
-		nickname?: string,
-		avatarUrl?: string,
-		password?: string
+		{
+			login,
+			email,
+			nickname,
+			avatarUrl,
+			password,
+		}: {
+			login?: string
+			email?: string
+			nickname?: string
+			avatarUrl?: string
+			password?: string
+		}
 	) {
 		let passwordHash = ''
 		if (!!password) passwordHash = await hash(password, 10)

@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import express from 'express'
 import { getPagesRouter } from './routers/pages-router'
 import { getUsersRouter } from './routers/users-router'

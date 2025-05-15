@@ -14,6 +14,7 @@ import {
 } from '../types/jwt-types'
 import { jwtRepository } from '../repositories/jwt-repository'
 import { RefreshTokenNotFoundError } from '../errors/refresh-token-not-found-error'
+import { usersService } from './users-service'
 
 const mapRefreshTokenPayloadDbTypeToRefreshTokenPayloadType = (
 	payload: WithId<RefreshTokenPayloadDbType> | null
@@ -83,5 +84,10 @@ export const authService = {
 			accessToken: accessToken,
 			refreshToken: refreshToken,
 		}
+	},
+
+	async passwordRecovery(token: string, newPassword: string) {
+		const payload = await jwtService.getPayloadByToken(token)
+		await usersService.patchUser(payload.userId, { password: newPassword })
 	},
 }

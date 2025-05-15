@@ -1,6 +1,7 @@
 import { UserNotFoundError } from '../errors/user-not-found-error'
 import { emailRepository } from '../repositories/email-repository'
 import { usersRepository } from '../repositories/users-repository'
+import { jwtService } from './jwt-service'
 
 export const emailService = {
 	async sendPasswordRecoveryEmail(id: string) {
@@ -8,10 +9,12 @@ export const emailService = {
 
 		if (!user) throw new UserNotFoundError(id)
 
+		const token = await jwtService.createPasswordRecoveryToken(id)
+
 		return await emailRepository.sendEmail(
 			user.userData.email,
 			'Password Recovery',
-			'We send you password recovery code'
+			`Click on this <a href='http://localhost:3500/forget-password?token${token}'>link</a> to recover your password`
 		)
 	},
 

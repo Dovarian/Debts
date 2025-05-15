@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { RequestWithBody, RequestWithParams } from '../types/request-types'
 import {
-	ConfirmAccountApiType,
-	LoginAccountApiType,
-} from '../api-types/auth-api-types'
+	RequestWithBody,
+	RequestWithParams,
+	RequestWithParamsAndBody,
+	RequestWithQuery,
+} from '../types/request-types'
 import { authValidators } from '../validators/auth-validations'
-import { body, param } from 'express-validator'
+import { body, param, query } from 'express-validator'
 import { inputValidationMiddleware } from '../middlewares/input-validation-middleware'
 import { authService } from '../services/auth-service'
 
@@ -17,7 +18,7 @@ export const getAuthRouter = () => {
 		authValidators.codeValidation(param),
 		inputValidationMiddleware,
 		async (
-			req: RequestWithParams<ConfirmAccountApiType>,
+			req: RequestWithParams<{ code: string }>,
 			res: Response,
 			next: NextFunction
 		) => {
@@ -38,7 +39,7 @@ export const getAuthRouter = () => {
 		],
 		inputValidationMiddleware,
 		async (
-			req: RequestWithBody<LoginAccountApiType>,
+			req: RequestWithBody<{ loginOrEmail: string; password: string }>,
 			res: Response,
 			next: NextFunction
 		) => {
@@ -93,6 +94,28 @@ export const getAuthRouter = () => {
 				})
 
 				res.sendStatus(200)
+			} catch (err) {
+				next(err)
+			}
+		}
+	)
+
+	router.post(
+		'/forget-password/:token',
+		[
+			authValidators.tokenValidation(param),
+			authValidators.passwordValidation(body),
+		],
+		inputValidationMiddleware,
+		async (
+			req: RequestWithParamsAndBody<{ token: string }, { password: string }>,
+			res: Response,
+			next: NextFunction
+		) => {
+			try {
+				await authService.passwordRecovery(req.params.token, req.body.password)
+
+				res.sendStatus(204)
 			} catch (err) {
 				next(err)
 			}
