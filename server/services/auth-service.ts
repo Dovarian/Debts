@@ -73,10 +73,7 @@ export const authService = {
 
 		if (!foundPayload)
 			throw new RefreshTokenNotFoundError(oldPayload.userId, oldPayload.jti)
-		// if (!(foundPayload.exp > new Date()))
-		// 	throw new RefreshTokenNotFoundError(foundPayload.userId, foundPayload.jti)
 
-		await jwtRepository.deleteRefreshTokensByUserId(foundPayload.userId)
 		const accessToken = await jwtService.createAccessToken(foundPayload.userId)
 		const refreshToken = await jwtService.createRefreshToken(
 			foundPayload.userId

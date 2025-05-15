@@ -17,7 +17,7 @@ export const jwtService = {
 		const payloadData = { userId: id, jti: uuidv4() }
 
 		const token = jwt.sign(payloadData, settings.JWT_SECRET, {
-			expiresIn: '30d',
+			expiresIn: '3s',
 		})
 
 		const payload = await this.getPayloadByToken(token)
