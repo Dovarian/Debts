@@ -1,8 +1,8 @@
 import { WithId } from 'mongodb'
 import { UserHasAlreadyBeenConfirmed } from '../errors/user-has-already-been-confirmed'
 import { UserNotFoundError } from '../errors/user-not-found-error'
-import { UserDBType } from '../types/users-types'
-import { CodeExpiredError } from '../errors/code-expired'
+import { UserDbType } from '../types/users-types'
+import { CodeExpiredError } from '../errors/code-expired-error'
 import { usersRepository } from '../repositories/users-repository'
 import { UserNotConfirmed } from '../errors/user-not-confirmed'
 import { compare } from 'bcrypt'
@@ -13,7 +13,7 @@ import {
 	RefreshTokenPayloadType,
 } from '../types/jwt-types'
 import { jwtRepository } from '../repositories/jwt-repository'
-import { RefreshTokenNotFoundError } from '../errors/refresh-token-not-found-error'
+import { TokenNotFoundError } from '../errors/token-not-found-error'
 import { usersService } from './users-service'
 
 const mapRefreshTokenPayloadDbTypeToRefreshTokenPayloadType = (
@@ -32,7 +32,7 @@ const mapRefreshTokenPayloadDbTypeToRefreshTokenPayloadType = (
 
 export const authService = {
 	async confirmUser(code: string) {
-		const user: WithId<UserDBType> | null =
+		const user: WithId<UserDbType> | null =
 			await usersRepository.findUserByConfirmationCode(code)
 
 		if (!user) throw new UserNotFoundError(code)
@@ -73,7 +73,7 @@ export const authService = {
 		)
 
 		if (!foundPayload)
-			throw new RefreshTokenNotFoundError(oldPayload.userId, oldPayload.jti)
+			throw new TokenNotFoundError(oldPayload.userId, oldPayload.jti)
 
 		const accessToken = await jwtService.createAccessToken(foundPayload.userId)
 		const refreshToken = await jwtService.createRefreshToken(

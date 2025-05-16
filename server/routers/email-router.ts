@@ -5,12 +5,14 @@ import { emailValidators } from '../validators/email-validations'
 import { param } from 'express-validator'
 import { inputValidationMiddleware } from '../middlewares/input-validation-middleware'
 import { emailService } from '../services/email-service'
+import { authorizationMiddleware } from '../middlewares/authorization-middleware'
 
 export const getEmailRouter = () => {
 	const router = Router()
 
 	router.post(
 		'/password-recovery/:id',
+		authorizationMiddleware,
 		emailValidators.idValidation(param),
 		inputValidationMiddleware,
 		async (

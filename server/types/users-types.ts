@@ -1,4 +1,4 @@
-export type UserDBType = {
+export type UserDbType = {
 	userData: {
 		login: string
 		email: string

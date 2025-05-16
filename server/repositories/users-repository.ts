@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { usersCollection } from './db'
-import { UserDBType } from '../types/users-types'
+import { UserDbType } from '../types/users-types'
 
 export const usersRepository = {
 	async findUsers(
@@ -41,7 +41,7 @@ export const usersRepository = {
 			'emailConfirmation.confirmationCode': code,
 		})
 	},
-	async addUser(user: UserDBType) {
+	async addUser(user: UserDbType) {
 		return (await usersCollection.insertOne(user)).insertedId
 	},
 	async patchUser(

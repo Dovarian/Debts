@@ -9,12 +9,13 @@ import { authValidators } from '../validators/auth-validations'
 import { body, param, query } from 'express-validator'
 import { inputValidationMiddleware } from '../middlewares/input-validation-middleware'
 import { authService } from '../services/auth-service'
+import { authorizationMiddleware } from '../middlewares/authorization-middleware'
 
 export const getAuthRouter = () => {
 	const router = Router()
 
 	router.patch(
-		'/confirmAccount/:code',
+		'/confirm-account/:code',
 		authValidators.codeValidation(param),
 		inputValidationMiddleware,
 		async (
@@ -102,6 +103,7 @@ export const getAuthRouter = () => {
 
 	router.post(
 		'/forget-password/:token',
+		authorizationMiddleware,
 		[
 			authValidators.tokenValidation(param),
 			authValidators.passwordValidation(body),

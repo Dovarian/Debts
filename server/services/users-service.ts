@@ -1,13 +1,13 @@
 import { WithId } from 'mongodb'
 import { usersRepository } from '../repositories/users-repository'
-import { UserDBType, UserViewType } from '../types/users-types'
+import { UserDbType, UserViewType } from '../types/users-types'
 import { UserNotFoundError } from '../errors/user-not-found-error'
 import { v4 as uuidv4 } from 'uuid'
 import { add } from 'date-fns'
 import { hash } from 'bcrypt'
 
 const mapUserDBTypeToUserViewType = (
-	user: WithId<UserDBType> | null
+	user: WithId<UserDbType> | null
 ): UserViewType | null => {
 	if (
 		!!user?._id.toHexString() ||
@@ -58,7 +58,7 @@ export const usersService = {
 		password: string,
 		nickname: string
 	) {
-		const user: UserDBType = {
+		const user: UserDbType = {
 			userData: {
 				avatarUrl: '',
 				email: email,
