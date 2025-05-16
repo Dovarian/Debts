@@ -7,6 +7,7 @@ import { LoginOrPasswordIncorrect } from '../errors/login-or-password-incorrect'
 import { TokenNotFoundError } from '../errors/token-not-found-error'
 import { TokenIncorrectError } from '../errors/token-incorrect-error'
 import { DataIncorrectError } from '../errors/data-incorrect-error'
+import { CreditorNotFoundError } from '../errors/creditor-not-found-error'
 
 export const errorHandlerMiddleware = (
 	err: UserNotFoundError,
@@ -44,6 +45,10 @@ export const errorHandlerMiddleware = (
 
 	if (err instanceof DataIncorrectError) {
 		res.status(400).json({ message: err.message })
+	}
+
+	if (err instanceof CreditorNotFoundError) {
+		res.status(404).json({ message: err.message })
 	}
 
 	res.status(500).json({ message: 'Internal Server Error' })

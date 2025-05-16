@@ -5,7 +5,7 @@ import { UserViewType } from '../types/users-types'
 import {
 	CreateUserApiType,
 	UpdateUserApiType,
-} from '../api-types/user-api-types'
+} from '../api-types/users-api-types'
 
 const createTestUsers = async (count: 1 | 2 | 3) => {
 	const usersData: CreateUserApiType[] = [

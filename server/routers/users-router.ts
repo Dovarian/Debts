@@ -15,7 +15,7 @@ import {
 	QueryUserApiType,
 	UpdateUserApiType,
 	UriParamUserApiType,
-} from '../api-types/user-api-types'
+} from '../api-types/users-api-types'
 import { UserViewType } from '../types/users-types'
 
 export const getUsersRouter = () => {
