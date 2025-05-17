@@ -8,6 +8,7 @@ import { getEmailRouter } from './routers/email-router'
 import { getAuthRouter } from './routers/auth-router'
 import cookieParser from 'cookie-parser'
 import { getCreditorsRouter } from './routers/creditors-router'
+import { getDebtsRouter } from './routers/debts-router'
 
 export const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use('/', getPagesRouter())
 app.use('/api/users', getUsersRouter())
 app.use('/api/creditors', getCreditorsRouter())
+app.use('/api/debts', getDebtsRouter())
 app.use('/api/email', getEmailRouter())
 app.use('/api/auth', getAuthRouter())
 app.use(errorHandlerMiddleware)

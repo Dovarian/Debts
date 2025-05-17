@@ -8,6 +8,7 @@ import { TokenNotFoundError } from '../errors/token-not-found-error'
 import { TokenIncorrectError } from '../errors/token-incorrect-error'
 import { DataIncorrectError } from '../errors/data-incorrect-error'
 import { CreditorNotFoundError } from '../errors/creditor-not-found-error'
+import { DebtNotFoundError } from '../errors/debt-not-found-error'
 
 export const errorHandlerMiddleware = (
 	err: UserNotFoundError,
@@ -48,6 +49,10 @@ export const errorHandlerMiddleware = (
 	}
 
 	if (err instanceof CreditorNotFoundError) {
+		res.status(404).json({ message: err.message })
+	}
+
+	if (err instanceof DebtNotFoundError) {
 		res.status(404).json({ message: err.message })
 	}
 

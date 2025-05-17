@@ -134,8 +134,8 @@ describe('/api/creditors', () => {
 		it('don`t create creditor with invalid userId', async () => {
 			const creditorData: CreateCreditorApiType = {
 				userId: '',
-				creditorName: '',
-				creditorAvatar: '',
+				creditorName: 'Andrey',
+				creditorAvatar: 'hgdfrh',
 			}
 			await request(app).post('/api/creditors').send(creditorData).expect(400)
 			await request(app).get('/api/creditors?page=1&pageSize=4').expect(200, [])

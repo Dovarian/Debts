@@ -1,22 +1,12 @@
-import { usersValidators } from './../validators/users-validators'
 import { NextFunction, Response, Router } from 'express'
-import { body, oneOf, param, query } from 'express-validator'
+import { body, param, query } from 'express-validator'
 import {
 	RequestWithBody,
 	RequestWithParams,
 	RequestWithParamsAndBody,
 	RequestWithQuery,
 } from '../types/request-types'
-import { usersService } from '../services/users-service'
 import { inputValidationMiddleware } from '../middlewares/input-validation-middleware'
-import {
-	CreateUserApiType,
-	QueryLoginOrEmailUserApiType,
-	QueryUserApiType,
-	UpdateUserApiType,
-	UriParamUserApiType,
-} from '../api-types/users-api-types'
-import { UserViewType } from '../types/users-types'
 import { creditorsValidators } from '../validators/creditors-validations'
 import {
 	CreateCreditorApiType,

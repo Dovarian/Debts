@@ -3,11 +3,12 @@ import { settings } from '../settings'
 import { UserDbType } from '../types/users-types'
 import { RefreshTokenPayloadDbType } from '../types/jwt-types'
 import { CreditorDbType } from '../types/creditors-types'
+import { DebtDbType } from '../types/debts-types'
 
 export const client = new MongoClient(settings.MONGO_URI)
 const db = client.db(settings.DB_NAME)
 export const usersCollection = db.collection<UserDbType>('users')
-// export const debtsCollection = db.collection<DebtDbType>('debts')
+export const debtsCollection = db.collection<DebtDbType>('debts')
 export const creditorsCollection = db.collection<CreditorDbType>('creditors')
 export const refreshTokensCollection = db.collection<RefreshTokenPayloadDbType>(
 	'refresh-tokens-payload'
