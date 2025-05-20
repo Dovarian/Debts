@@ -6,6 +6,7 @@
 		<title>The Debtor</title>
 		<link rel="stylesheet" href="/styles/style.css" />
 		<link rel="stylesheet" href="/styles/main/style.css" />
+		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 		<script src="/dist/main/script.js" defer type="module"></script>
 	</head>
 	<body>
@@ -51,7 +52,9 @@
 		<header>
 			<span class="header__title">Должник</span>
 			<div class="header__user">
-				<button class="header__logout-btn">Выйти</button>
+				<button class="header__logout-btn" id="header__logout-btn">
+					Выйти
+				</button>
 				<a href="/profile"
 					><img
 						src="/assets/images/default-user-avatar.png"

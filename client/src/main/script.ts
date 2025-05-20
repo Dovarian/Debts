@@ -50,3 +50,12 @@ document
 document
 	.querySelector('#add-debtor-form__submit-btn')
 	?.addEventListener('click', handleSubmitClick)
+
+const handleLogout = async (e: Event) => {
+	await axios.post('/api/auth/logout')
+	window.location.href = '/login'
+}
+
+document
+	.querySelector('#header__logout-btn')
+	?.addEventListener('click', handleLogout)

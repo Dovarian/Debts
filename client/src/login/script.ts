@@ -1,5 +1,3 @@
-declare const axios: any
-
 const transformDataFromForm = (form: HTMLFormElement) => {
 	const formData = new FormData(form)
 
@@ -14,10 +12,8 @@ const handleSubmit = async (e: Event) => {
 
 	const user = transformDataFromForm(e.target as HTMLFormElement)
 
-	const res = await axios.post('http://localhost:3500/api/auth/login', user)
-	console.log(res)
-
-	return false
+	await axios.post('/api/auth/login', user)
+	window.location.href = '/'
 }
 
 document.querySelector('#login-form')?.addEventListener('submit', handleSubmit)
