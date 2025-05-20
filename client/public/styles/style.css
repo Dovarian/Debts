@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	--primary-color: white;
+	--secondary-color: rgb(98, 70, 235);
+	--secondary-color-hover: rgb(124, 98, 255);
+	--secondary-text-color: white;
+	--tertiary-color: rgb(246, 246, 246);
+	--tertiary-color-hover: rgb(237, 237, 237);
+	--tertiary-text-color: rgb(120, 120, 120);
+	--tertiary-placeholder-color: rgb(176, 176, 176);
+	--box-shadow-sm: 1px 1px 3px 0px rgba(34, 60, 80, 0.2);
+	--box-shadow-md: 2px 2px 8px 0px rgba(34, 60, 80, 0.2);
+
+	--transition-time: 0.15s;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 1.1rem;
+	font-family: 'Inter', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+}
+
+button {
+	all: unset;
+	user-select: none;
+	cursor: pointer;
+	transition: var(--transition-time);
+	font-weight: 500;
+}
+
+a {
+	user-select: none;
+}
+
+input {
+	all: unset;
+	background-color: var(--tertiary-color);
+	padding: 0.85rem 1rem;
+	border-radius: 0.75rem;
+	transition: var(--transition-time);
+}
+
+input:focus {
+	box-shadow: var(--box-shadow-sm);
+}
+
+input::placeholder {
+	color: var(--tertiary-placeholder-color);
+}
+
+.more-arrow {
+	cursor: pointer;
+}

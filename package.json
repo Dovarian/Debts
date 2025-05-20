@@ -1,13 +1,14 @@
 {
-	"name": "NotesOnline",
+	"name": "Debts",
 	"version": "1.0.0",
 	"main": "server.js",
 	"author": "Dovarian",
 	"license": "MIT",
 	"scripts": {
-		"dev": "yarn nodemon --inspect ./dist/server.js",
-		"watch": "yarn tsc --watch",
-		"test": "yarn jest"
+		"dev": "yarn nodemon --inspect ./server/dist/server.js",
+		"watch:server": "yarn tsc -p ./server/tsconfig.json --watch",
+		"watch:client": "yarn tsc -p ./client/tsconfig.json --watch",
+		"test": "yarn tsc -p ./server/tsconfig.json && yarn jest"
 	},
 	"dependencies": {
 		"bcrypt": "^5.1.1",

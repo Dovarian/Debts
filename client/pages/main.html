@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>The Debtor</title>
+		<link rel="stylesheet" href="/styles/style.css" />
+		<link rel="stylesheet" href="/styles/main/style.css" />
+		<script src="/dist/main/script.js" defer></script>
+	</head>
+	<body>
+		<dialog id="add-debtor-modal">
+			<span class="add-debtor-modal__title">Новый должник</span>
+			<form action="#" class="add-debtor-form">
+				<div class="add-debtor-form__item">
+					<label for="add-debtor-form__name">Имя</label>
+					<input type="text" placeholder="Имя" id="add-debtor-form__name" />
+				</div>
+				<div class="add-debtor-form__item">
+					<label for="add-debtor-form__amount">Сумма</label>
+					<input
+						type="number"
+						placeholder="Сумма"
+						id="add-debtor-form__amount"
+					/>
+				</div>
+				<div class="add-debtor-form__item">
+					<label for="add-debtor-form__date">Дата</label>
+					<input type="date" placeholder="Дата" id="add-debtor-form__date" />
+				</div>
+
+				<div class="add-debtor-form__buttons">
+					<button
+						type="submit"
+						class="add-debtor-form__submit-btn"
+						id="add-debtor-form__submit-btn"
+					>
+						Сохранить
+					</button>
+
+					<button
+						id="add-debtor-form__cancel-btn"
+						class="add-debtor-form__cancel-btn"
+					>
+						Отмена
+					</button>
+				</div>
+			</form>
+		</dialog>
+
+		<header>
+			<span class="header__title">Должник</span>
+			<div class="header__user">
+				<button class="header__logout-btn">Выйти</button>
+				<a href="/profile"
+					><img
+						src="/assets/images/default-user-avatar.png"
+						height="32"
+						width="32"
+						alt="avatar"
+						class="header__user_avatar"
+				/></a>
+			</div>
+		</header>
+
+		<main>
+			<span class="main__title">Должники</span>
+			<div class="main__menu">
+				<div class="filter">
+					<div class="filter__search">
+						<span class="filter__title">Поиск</span>
+						<input type="text" placeholder="Найти по имени" />
+					</div>
+					<div class="filter__sort">
+						<span class="filter__title">Сортировать по</span>
+						<div class="dropdown-toggle_sort">
+							<span>Выберите опцию</span>
+							<img
+								src="/assets/icons/markdown-black.svg"
+								alt="show"
+								height="16"
+								width="16"
+							/>
+						</div>
+					</div>
+				</div>
+				<div>
+					<button class="main__debtor-add-btn" id="main__debtor-add-btn">
+						Добавить
+					</button>
+				</div>
+			</div>
+			<div class="debtors-list">
+				<div class="debtor">
+					<div class="debtor__main">
+						<div class="debtor__profile">
+							<img
+								src="/assets/images/default-user-avatar.png"
+								height="48"
+								width="48"
+								alt="avatar"
+								class="debtor__avatar"
+							/>
+							<div class="debtor__data">
+								<span class="debtor__name">Дима Болтенков</span>
+								<span class="debtor__amount">1 000₽</span>
+							</div>
+						</div>
+						<img
+							src="/assets/icons/arrow-right-black.svg"
+							alt="more"
+							height="32"
+							width="32"
+							class="more-arrow"
+						/>
+					</div>
+
+					<div class="debtor__additional-info">
+						<div class="debts">
+							<div class="debts__item debts__title">
+								<span>Дата</span>
+								<span>Сумма</span>
+								<span>Статус</span>
+							</div>
+							<div class="debts__item">
+								<span>2025.19.06</span>
+								<span>1 000₽</span>
+								<span>Действителен</span>
+							</div>
+							<div class="debts__item">
+								<span>2025.19.06</span>
+								<span>1 000₽</span>
+								<span>Действителен</span>
+							</div>
+							<div class="debts__item">
+								<span>2025.19.06</span>
+								<span>1 000₽</span>
+								<span>Действителен</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="debtor">
+					<div class="debtor__main">
+						<div class="debtor__profile">
+							<img
+								src="/assets/images/default-user-avatar.png"
+								height="48"
+								width="48"
+								alt="avatar"
+								class="debtor__avatar"
+							/>
+							<div class="debtor__data">
+								<span class="debtor__name">Дима Болтенков</span>
+								<span class="debtor__amount">1 000₽</span>
+							</div>
+						</div>
+						<img
+							src="/assets/icons/arrow-right-black.svg"
+							alt="more"
+							height="32"
+							width="32"
+							class="more-arrow"
+						/>
+					</div>
+
+					<div class="debtor__additional-info">
+						<div class="debts">
+							<div class="debts__item debts__title">
+								<span>Дата</span>
+								<span>Сумма</span>
+								<span>Статус</span>
+							</div>
+							<div class="debts__item">
+								<span>2025.19.06</span>
+								<span>1 000₽</span>
+								<span>Действителен</span>
+							</div>
+							<div class="debts__item">
+								<span>2025.19.06</span>
+								<span>1 000₽</span>
+								<span>Действителен</span>
+							</div>
+							<div class="debts__item">
+								<span>2025.19.06</span>
+								<span>1 000₽</span>
+								<span>Действителен</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

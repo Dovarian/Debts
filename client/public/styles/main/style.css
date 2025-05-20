@@ -1,0 +1,235 @@
+header {
+	padding: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: var(--box-shadow-sm);
+}
+
+.header__title {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.header__user {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.header__user > a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header__logout-btn {
+	background-color: var(--secondary-color);
+	color: var(--secondary-text-color);
+	padding: 0.3rem 0.8rem;
+	border-radius: 0.5rem;
+}
+
+.header__logout-btn:hover {
+	background-color: var(--secondary-color-hover);
+	box-shadow: var(--box-shadow-md);
+}
+
+.header__user_avatar {
+	height: 2rem;
+	width: 2rem;
+	border-radius: 100%;
+}
+
+main {
+	margin: 5rem 20rem 0 20rem;
+}
+
+.main__title {
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.main__menu {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 2rem;
+}
+
+.filter {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 75%;
+}
+
+.filter__search > input {
+	background: var(--tertiary-color) url('/assets/icons/loupe-black.svg')
+		no-repeat 95% 50%;
+	background-size: 1rem;
+}
+
+.filter__search,
+.filter__sort {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 48%;
+}
+
+.filter__search > .filter__title,
+.filter__sort > .filter__title {
+	font-weight: 500;
+}
+
+.main__debtor-add-btn {
+	background-color: var(--secondary-color);
+	color: var(--secondary-text-color);
+	padding: 0.75rem 4rem;
+	border-radius: 1rem;
+}
+
+.main__debtor-add-btn:hover {
+	background-color: var(--secondary-color-hover);
+	box-shadow: var(--box-shadow-md);
+}
+
+.dropdown-toggle_sort {
+	color: var(--tertiary-placeholder-color);
+	background-color: var(--tertiary-color);
+	padding: 0.75rem 1rem;
+	border-radius: 0.75rem;
+	transition: var(--transition-time);
+	cursor: pointer;
+	user-select: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.dropdown-toggle_sort:hover {
+	box-shadow: var(--box-shadow-sm);
+}
+
+.debtors-list {
+	margin-top: 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.debtor__main {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.debtor__profile {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.debtor__avatar {
+	height: 3rem;
+	width: 3rem;
+	border-radius: 100%;
+}
+
+.debtor__data {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.debtor__amount {
+	color: var(--tertiary-text-color);
+}
+
+.debtor__additional-info {
+	display: none;
+	opacity: 0;
+	transition: var(--transition-time);
+}
+
+.debtor__additional-info_open {
+	display: block;
+	transition: var(--transition-time);
+	opacity: 1;
+	margin-top: 1.5rem;
+}
+
+.debts {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.debts__item {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.debts__title {
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+
+#add-debtor-modal {
+	width: 75vw;
+	border: none;
+	outline: none;
+}
+
+.add-debtor-modal__title {
+	font-weight: 500;
+	font-size: 1.5rem;
+}
+
+.add-debtor-form {
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.add-debtor-form__item {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.add-debtor-form__submit-btn {
+	background-color: var(--secondary-color);
+	color: var(--secondary-text-color);
+	padding: 1rem 2rem;
+	text-align: center;
+	border-radius: 1rem;
+	width: 45%;
+}
+
+.add-debtor-form__submit-btn:hover {
+	background-color: var(--secondary-color-hover);
+}
+
+.add-debtor-form__cancel-btn {
+	background-color: var(--tertiary-color);
+	color: var(--secondary-color);
+	padding: 1rem 2rem;
+	text-align: center;
+	border-radius: 1rem;
+	width: 45%;
+}
+
+.add-debtor-form__cancel-btn:hover {
+	background-color: var(--tertiary-color-hover);
+	color: var(--secondary-color-hover);
+}
+
+.add-debtor-form__buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}

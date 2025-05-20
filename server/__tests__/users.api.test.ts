@@ -1,11 +1,11 @@
-import { app } from '../app'
-import { client, usersCollection } from '../repositories/db'
+import { app } from '../src/app'
+import { client, usersCollection } from '../src/repositories/db'
 import request from 'supertest'
-import { UserViewType } from '../types/users-types'
+import { UserViewType } from '../src/types/users-types'
 import {
 	CreateUserApiType,
 	UpdateUserApiType,
-} from '../api-types/users-api-types'
+} from '../src/api-types/users-api-types'
 
 const createTestUsers = async (count: 1 | 2 | 3) => {
 	const usersData: CreateUserApiType[] = [

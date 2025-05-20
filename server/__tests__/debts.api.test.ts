@@ -1,10 +1,10 @@
-import { DebtViewType } from './../types/debts-types'
+import { DebtViewType } from './../src/types/debts-types'
 import {
 	CreateDebtApiType,
 	UpdateDebtApiType,
-} from './../api-types/debts-api-types'
-import { app } from '../app'
-import { client, debtsCollection } from '../repositories/db'
+} from './../src/api-types/debts-api-types'
+import { app } from '../src/app'
+import { client, debtsCollection } from '../src/repositories/db'
 import request from 'supertest'
 
 const createTestDebts = async (count: 1 | 2 | 3) => {

@@ -1,0 +1,27 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
+require("dotenv/config");
+const express_1 = __importDefault(require("express"));
+const pages_router_1 = require("./routers/pages-router");
+const users_router_1 = require("./routers/users-router");
+const error_handler_middleware_1 = require("./middlewares/error-handler-middleware");
+const email_router_1 = require("./routers/email-router");
+const auth_router_1 = require("./routers/auth-router");
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const creditors_router_1 = require("./routers/creditors-router");
+const debts_router_1 = require("./routers/debts-router");
+exports.app = (0, express_1.default)();
+exports.app.use((0, cookie_parser_1.default)());
+exports.app.use(express_1.default.json());
+exports.app.use('/', (0, pages_router_1.getPagesRouter)());
+exports.app.use(express_1.default.static(process.cwd() + '/client/public'));
+exports.app.use('/api/users', (0, users_router_1.getUsersRouter)());
+exports.app.use('/api/creditors', (0, creditors_router_1.getCreditorsRouter)());
+exports.app.use('/api/debts', (0, debts_router_1.getDebtsRouter)());
+exports.app.use('/api/email', (0, email_router_1.getEmailRouter)());
+exports.app.use('/api/auth', (0, auth_router_1.getAuthRouter)());
+exports.app.use(error_handler_middleware_1.errorHandlerMiddleware);

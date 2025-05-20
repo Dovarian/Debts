@@ -1,11 +1,11 @@
+import { app } from './../src/app'
+import { CreditorViewType } from './../src/types/creditors-types'
 import {
 	CreateCreditorApiType,
 	UpdateCreditorApiType,
-} from './../api-types/creditors-api-types'
-import { app } from '../app'
-import { client, creditorsCollection } from '../repositories/db'
+} from './../src/api-types/creditors-api-types'
 import request from 'supertest'
-import { CreditorViewType } from '../types/creditors-types'
+import { client, creditorsCollection } from '../src/repositories/db'
 
 const createTestCreditors = async (count: 1 | 2 | 3) => {
 	const creditorsData: CreateCreditorApiType[] = [
