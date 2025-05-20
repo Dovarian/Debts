@@ -11,5 +11,9 @@ export const getPagesRouter = () => {
 		res.status(200).sendFile(process.cwd() + '/client/pages/registration.html')
 	})
 
+	router.get('/login', async (req, res) => {
+		res.status(200).sendFile(process.cwd() + '/client/pages/login.html')
+	})
+
 	return router
 }
