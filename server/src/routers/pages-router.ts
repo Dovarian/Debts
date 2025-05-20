@@ -1,11 +1,16 @@
-import { Router } from 'express'
+import { NextFunction, Router } from 'express'
+import { authorizationMiddleware } from '../middlewares/authorization-middleware'
 
 export const getPagesRouter = () => {
 	const router = Router()
 
-	router.get('/', async (req, res) => {
-		res.status(200).sendFile(process.cwd() + '/client/pages/main.html')
-	})
+	router.get(
+		'/',
+		authorizationMiddleware,
+		async (req, res, next: NextFunction) => {
+			res.status(200).sendFile(process.cwd() + '/client/pages/main.html')
+		}
+	)
 
 	router.get('/registration', async (req, res) => {
 		res.status(200).sendFile(process.cwd() + '/client/pages/registration.html')

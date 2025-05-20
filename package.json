@@ -11,6 +11,7 @@
 		"test": "yarn tsc -p ./server/tsconfig.json && yarn jest"
 	},
 	"dependencies": {
+		"axios": "^1.9.0",
 		"bcrypt": "^5.1.1",
 		"cookie-parser": "^1.4.7",
 		"date-fns": "^4.1.0",
@@ -27,6 +28,7 @@
 		"uuid": "^11.1.0"
 	},
 	"devDependencies": {
+		"@types/axios": "^0.14.4",
 		"@types/bcrypt": "^5.0.2",
 		"@types/cookie-parser": "^1.4.8",
 		"@types/date-fns": "^2.6.3",

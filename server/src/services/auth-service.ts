@@ -90,4 +90,9 @@ export const authService = {
 		const payload = await jwtService.getPayloadByToken(token)
 		await usersService.patchUser(payload.userId, { password: newPassword })
 	},
+
+	async logout(refreshToken: string) {
+		const payload = await jwtService.getPayloadByToken(refreshToken)
+		await jwtRepository.deleteRefreshTokenByPayload(payload)
+	},
 }

@@ -9,6 +9,7 @@ import { TokenIncorrectError } from '../errors/token-incorrect-error'
 import { DataIncorrectError } from '../errors/data-incorrect-error'
 import { CreditorNotFoundError } from '../errors/creditor-not-found-error'
 import { DebtNotFoundError } from '../errors/debt-not-found-error'
+import { UserNotLoggedInError } from '../errors/user-not-logged-in-error'
 
 export const errorHandlerMiddleware = (
 	err: UserNotFoundError,
@@ -54,6 +55,10 @@ export const errorHandlerMiddleware = (
 
 	if (err instanceof DebtNotFoundError) {
 		res.status(404).json({ message: err.message })
+	}
+
+	if (err instanceof UserNotLoggedInError) {
+		res.status(302).redirect('/login')
 	}
 
 	res.status(500).json({ message: 'Internal Server Error' })

@@ -124,5 +124,30 @@ export const getAuthRouter = () => {
 		}
 	)
 
+	router.post(
+		'/logout',
+		authorizationMiddleware,
+		async (req: Request, res: Response, next: NextFunction) => {
+			try {
+				await authService.logout(req.cookies.refreshToken)
+
+				res.clearCookie('accessToken', {
+					httpOnly: true,
+					secure: true,
+					sameSite: 'strict',
+				})
+				res.clearCookie('refreshToken', {
+					httpOnly: true,
+					secure: true,
+					sameSite: 'strict',
+				})
+
+				res.sendStatus(204)
+			} catch (err) {
+				next(err)
+			}
+		}
+	)
+
 	return router
 }

@@ -5,7 +5,7 @@ import { settings } from '../settings'
 import { TokenIncorrectError } from '../errors/token-incorrect-error'
 import { usersRepository } from '../repositories/users-repository'
 import { UserNotConfirmed } from '../errors/user-not-confirmed'
-import { DataIncorrectError } from '../errors/data-incorrect-error'
+import { UserNotLoggedInError } from '../errors/user-not-logged-in-error'
 
 export const authorizationMiddleware = async (
 	req: any,
@@ -13,21 +13,13 @@ export const authorizationMiddleware = async (
 	next: NextFunction
 ) => {
 	try {
-		// const authHeader = req.headers.authorization
-
-		// if (!authHeader) throw new TokenNotFoundError()
-
-		// const accessToken = authHeader.split(' ')[1]
-
-		// if (!accessToken) throw new TokenNotFoundError()
-
 		const accessToken = req.cookies.accessToken
 
-		if (!accessToken) throw new TokenNotFoundError()
+		if (!accessToken) throw new UserNotLoggedInError()
 
 		const payload: any = jwt.verify(accessToken, settings.JWT_SECRET)
 
-		if (!payload) throw new TokenIncorrectError(accessToken)
+		if (!payload) throw new UserNotLoggedInError()
 
 		const user = await usersRepository.findUser(payload.userId)
 
@@ -38,7 +30,6 @@ export const authorizationMiddleware = async (
 		req.context.user = payload
 		next()
 	} catch (err) {
-		console.log(err)
 		next(err)
 	}
 }
