@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>The Debtor</title>
+		<link rel="stylesheet" href="/styles/style.css" />
+		<link rel="stylesheet" href="/styles/account-confirmation/style.css" />
+		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+		<script
+			src="/dist/account-confirmation/script.js"
+			defer
+			type="module"
+		></script>
+	</head>
+	<body>
+		<main>
+			<span class="main__title">Подтверждение аккаунта</span>
+			<p class="main__info">
+				Мы выслали на почту, указанную при регистрации, письмо с кодом. Введите
+				код в поле ниже, что бы закончить регистрацию
+			</p>
+
+			<form class="account-confirmation-form" id="account-confirmation-form">
+				<div class="account-confirmation-form__item">
+					<label for="account-confirmation-form__code">Код</label
+					><input
+						type="text"
+						class="account-confirmation-form__code"
+						name="code"
+						placeholder="Введите код"
+					/>
+				</div>
+
+				<button type="submit" class="account-confirmation-form__submit-btn">
+					Подтвердить
+				</button>
+				<button
+					class="account-confirmation-form__resend-btn"
+					id="account-confirmation-form__resend-btn"
+				>
+					Отправить еще раз
+				</button>
+				<span
+					class="account-confirmation-form__timer"
+					id="account-confirmation-form__timer"
+				></span>
+			</form>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+main {
+	width: 30rem;
+	margin: 2rem auto;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.main__title {
+	font-weight: 500;
+	font-size: 2rem;
+}
+
+.main__info {
+	color: var(--tertiary-text-color);
+}
+
+.account-confirmation-form {
+	gap: 1.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.account-confirmation-form__item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.account-confirmation-form__submit-btn {
+	background-color: var(--secondary-color);
+	color: var(--secondary-text-color);
+	padding: 1rem 2rem;
+	text-align: center;
+	border-radius: 1rem;
+}
+
+.account-confirmation-form__submit-btn:hover {
+	background-color: var(--secondary-color-hover);
+}
+
+.account-confirmation-form__resend-btn {
+	border: var(--tertiary-placeholder-color) 0.1rem solid;
+	color: var(--secondary-color);
+	padding: 1rem 2rem;
+	text-align: center;
+	border-radius: 1rem;
+	width: calc(100% - 4rem);
+}
+
+.account-confirmation-form__resend-btn:hover {
+	background-color: var(--secondary-color-hover);
+	color: var(--secondary-text-color);
+}
+
+.account-confirmation-form__resend-btn:disabled {
+	background-color: var(--tertiary-color);
+	color: var(--tertiary-text-color);
+	cursor: auto;
+}
+
+.account-confirmation-form__resend-btn:hover:disabled {
+	background-color: var(--tertiary-color);
+	color: var(--tertiary-text-color);
+}
+
+.account-confirmation-form__timer {
+	margin: 0 auto;
+	color: var(--tertiary-text-color);
+}

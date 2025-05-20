@@ -6,19 +6,21 @@
 		<title>The Debtor</title>
 		<link rel="stylesheet" href="/styles/style.css" />
 		<link rel="stylesheet" href="/styles/registration/style.css" />
+		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 		<script src="/dist/registration/script.js" defer type="module"></script>
 	</head>
 	<body>
 		<main>
 			<span class="main__title">Создание аккаунта</span>
 
-			<form action="#" class="create-user-form">
+			<form action="#" class="create-user-form" id="create-user-form">
 				<div class="create-user-form__item">
 					<label for="create-user-form__login">Логин</label
 					><input
 						type="text"
 						placeholder="Введите ваш логин"
 						id="create-user-form__login"
+						name="login"
 					/>
 				</div>
 				<div class="create-user-form__item">
@@ -27,6 +29,7 @@
 						type="email"
 						placeholder="Введите ваш email"
 						id="create-user-form__email"
+						name="email"
 					/>
 				</div>
 				<div class="create-user-form__item">
@@ -35,6 +38,7 @@
 						type="text"
 						placeholder="Введите ваш никнейм"
 						id="create-user-form__nickname"
+						name="nickname"
 					/>
 				</div>
 				<div class="create-user-form__item">
@@ -43,6 +47,7 @@
 						type="text"
 						placeholder="Введите ваш пароль"
 						id="create-user-form__password"
+						name="password"
 					/>
 				</div>
 				<div class="create-user-form__item">
