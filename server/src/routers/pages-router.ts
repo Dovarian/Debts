@@ -7,5 +7,9 @@ export const getPagesRouter = () => {
 		res.status(200).sendFile(process.cwd() + '/client/pages/main.html')
 	})
 
+	router.get('/registration', async (req, res) => {
+		res.status(200).sendFile(process.cwd() + '/client/pages/registration.html')
+	})
+
 	return router
 }

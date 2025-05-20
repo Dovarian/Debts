@@ -8,5 +8,62 @@
 		<link rel="stylesheet" href="/styles/registration/style.css" />
 		<script src="/dist/registration/script.js" defer></script>
 	</head>
-	<body></body>
+	<body>
+		<main>
+			<span class="main__title">Создание аккаунта</span>
+
+			<form action="#" class="create-user-form">
+				<div class="create-user-form__item">
+					<label for="create-user-form__login">Логин</label
+					><input
+						type="text"
+						placeholder="Введите ваш логин"
+						id="create-user-form__login"
+					/>
+				</div>
+				<div class="create-user-form__item">
+					<label for="create-user-form__email">Email</label
+					><input
+						type="email"
+						placeholder="Введите ваш email"
+						id="create-user-form__email"
+					/>
+				</div>
+				<div class="create-user-form__item">
+					<label for="create-user-form__nickname">Никнейм</label
+					><input
+						type="text"
+						placeholder="Введите ваш никнейм"
+						id="create-user-form__nickname"
+					/>
+				</div>
+				<div class="create-user-form__item">
+					<label for="create-user-form__password">Пароль</label
+					><input
+						type="text"
+						placeholder="Введите ваш пароль"
+						id="create-user-form__password"
+					/>
+				</div>
+				<div class="create-user-form__item">
+					<label for="create-user-form__password-repeat"
+						>Подтвердите пароль</label
+					><input
+						type="text"
+						placeholder="Введите еще раз ваш пароль"
+						id="create-user-form__password-repeat"
+					/>
+				</div>
+
+				<button type="submit" class="create-user-form__submit-btn">
+					Зарегестрироваться
+				</button>
+			</form>
+
+			<div class="main__login-text">Уже есть аккаунт?</div>
+			<div>
+				<a href="/login"><button class="main__login-btn">Войти</button></a>
+			</div>
+		</main>
+	</body>
 </html>
