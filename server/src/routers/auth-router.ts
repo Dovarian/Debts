@@ -45,6 +45,8 @@ export const getAuthRouter = () => {
 			next: NextFunction
 		) => {
 			try {
+				console.log('Hello')
+
 				const { accessToken, refreshToken } =
 					await authService.checkCredentials(
 						req.body.loginOrEmail,
